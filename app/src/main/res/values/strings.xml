@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Hackathon</string>
+    <string name="new_defect">Новый дефект</string>
+    <string name="defect_type">Тип дефекта</string>
+    <string name="coordinates">Координаты</string>
+    <string name="volume">Объём (кв.м)</string>
+    <string name="upload_photo">Загрузить фотографии</string>
+    <string name="add_photo">Добавить фотографии</string>
+    <string name="create">Создать</string>
 </resources>
