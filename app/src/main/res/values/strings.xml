@@ -4,4 +4,9 @@
     // Onboarding
     <string name="startDescription">Откажитесь от тонны письменной работы и автоматизируйте исправление дорожных дефектов в несколько кликов.</string>
     <string name="logIn">Войти</string>
+
+    // Bottom navigation
+    <string name="statements">Statements</string>
+    <string name="map">Map</string>
+    <string name="profile">Profile</string>
 </resources>

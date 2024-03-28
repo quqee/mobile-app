@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.core.ui.common.PrimaryButton
 import com.suslanium.hackathon.core.ui.theme.DarkBlue
@@ -27,7 +26,8 @@ import com.suslanium.hackathon.core.ui.theme.S20_W700
 
 @Composable
 fun OnboardingScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToAuth: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -64,15 +64,7 @@ fun OnboardingScreen(
         PrimaryButton(
             modifier = Modifier.padding(bottom = PaddingXXLarge),
             text = stringResource(id = R.string.logIn),
-            onClick = {
-                // TODO navigate to auth
-            }
+            onClick = onNavigateToAuth
         )
     }
-}
-
-@Preview
-@Composable
-private fun Prev() {
-    OnboardingScreen()
 }
