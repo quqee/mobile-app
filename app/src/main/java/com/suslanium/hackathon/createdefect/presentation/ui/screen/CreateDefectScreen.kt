@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.createdefect.presentation.CreateDefectViewModel
 import com.suslanium.hackathon.createdefect.presentation.ui.common.ObserveAsEvents
@@ -17,11 +16,12 @@ import com.suslanium.hackathon.createdefect.presentation.ui.screen.components.Lo
 import com.suslanium.hackathon.createdefect.presentation.ui.state.CreateDefectScreenState
 import com.suslanium.hackathon.createdefect.presentation.ui.state.CreateDefectSectionState
 import com.suslanium.hackathon.createdefect.presentation.ui.state.DefectCreationEvent
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CreateDefectScreen(onNavigateAfterSuccess: () -> Unit) {
     val context = LocalContext.current
-    val viewModel: CreateDefectViewModel = viewModel()
+    val viewModel: CreateDefectViewModel = koinViewModel()
     val screenState by remember {
         viewModel.screenState
     }

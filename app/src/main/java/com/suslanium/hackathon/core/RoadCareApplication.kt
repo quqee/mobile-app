@@ -6,6 +6,7 @@ import com.yandex.mapkit.MapKitFactory
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
+import com.suslanium.hackathon.createdefect.di.provideCreateDefectPresentationModule
 import com.suslanium.hackathon.di.providePresentationModule
 import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
 import org.koin.android.ext.koin.androidContext
@@ -26,7 +27,9 @@ class RoadCareApplication : Application() {
                 provideAuthDataModule(),
                 provideAuthPresentationModule(),
               
-                profileProvidePresentationModule()
+                profileProvidePresentationModule(),
+
+                provideCreateDefectPresentationModule()
             )
         }
     }
