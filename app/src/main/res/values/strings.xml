@@ -44,6 +44,7 @@
     // Statements
     <string name="createStatement">Создать ведомость</string>
     <string name="statement">Ведомость</string>
+    <string name="statementsRu">Ведомости</string>
 
     // Defects
     <string name="defects">Дефекты</string>

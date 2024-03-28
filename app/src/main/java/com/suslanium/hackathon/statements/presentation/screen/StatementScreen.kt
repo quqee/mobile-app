@@ -1,13 +1,13 @@
 package com.suslanium.hackathon.statements.presentation.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -27,9 +27,12 @@ import com.suslanium.hackathon.core.ui.common.RoadCareTopBar
 import com.suslanium.hackathon.core.ui.common.StatementFullCard
 import com.suslanium.hackathon.core.ui.theme.DarkBlue
 import com.suslanium.hackathon.core.ui.theme.PaddingMedium
+import com.suslanium.hackathon.core.ui.theme.PaddingSmall
 import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S15_W600
 import com.suslanium.hackathon.core.ui.theme.S16_W700
+import com.suslanium.hackathon.createdefect.presentation.ui.screen.components.ErrorContent
+import com.suslanium.hackathon.createdefect.presentation.ui.screen.components.LoadingContent
 import com.suslanium.hackathon.statements.presentation.components.ShortDefectCard
 import com.suslanium.hackathon.statements.presentation.state.StatementUiState
 import com.suslanium.hackathon.statements.presentation.viewmodel.StatementViewModel
@@ -40,6 +43,8 @@ import org.koin.core.parameter.parametersOf
 fun StatementScreen(
     statementId: String,
     onNavigateBack: () -> Unit,
+    onNavigateToCreateDefect: (String) -> Unit,
+    // TODO onNavigateToCreateOrder
     modifier: Modifier = Modifier
 ) {
     val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId) })
@@ -54,40 +59,63 @@ fun StatementScreen(
         },
         floatingActionButton = {
             if (uiState is StatementUiState.Success) {
-                // TODO two FABs
-                ExtendedFloatingActionButton(
-                    text = {
-                        Text(
-                            text = stringResource(id = R.string.defect),
-                            style = S15_W600
-                        )
-                    },
-                    onClick = {
-                        // TODO navigate to add a defect or add an order
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
-                            contentDescription = stringResource(id = R.string.createStatement),
-                        )
-                    },
-                    containerColor = Primary,
-                    contentColor = Color.White
-                )
+                Column {
+                    ExtendedFloatingActionButton(
+                        text = {
+                            Text(
+                                text = stringResource(id = R.string.defect),
+                                style = S15_W600
+                            )
+                        },
+                        onClick = {
+                            onNavigateToCreateDefect(statementId)
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
+                                contentDescription = stringResource(id = R.string.createStatement),
+                            )
+                        },
+                        containerColor = Primary,
+                        contentColor = Color.White
+                    )
+
+                    Spacer(modifier = Modifier.height(PaddingSmall))
+
+                    ExtendedFloatingActionButton(
+                        text = {
+                            Text(
+                                text = stringResource(id = R.string.order),
+                                style = S15_W600
+                            )
+                        },
+                        onClick = {
+                            // TODO navigate to add an order
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
+                                contentDescription = stringResource(id = R.string.createStatement),
+                            )
+                        },
+                        containerColor = Primary,
+                        contentColor = Color.White
+                    )
+                }
             }
         }
     ) {
         when (uiState) {
             StatementUiState.Initial -> Unit
-            StatementUiState.Loading -> Unit
-            StatementUiState.Error -> TODO()
+            StatementUiState.Loading -> LoadingContent()
+            StatementUiState.Error -> ErrorContent(onRetry = viewModel::onRetry)
             is StatementUiState.Success -> {
                 val statement = (uiState as StatementUiState.Success).statement
                 Column(
                     modifier = modifier
                         .padding(it)
                         .padding(horizontal = PaddingMedium)
-                        .verticalScroll(rememberScrollState()),
+                        .background(Color.White),
                     verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     StatementFullCard(
@@ -99,17 +127,19 @@ fun StatementScreen(
                         direction = statement.direction
                     )
 
-                    Text(
-                        text = stringResource(id = R.string.defects),
-                        style = S16_W700,
-                        color = DarkBlue
-                    )
+                    if (statement.defects.isNotEmpty()) {
+                        Text(
+                            text = stringResource(id = R.string.defects),
+                            style = S16_W700,
+                            color = DarkBlue
+                        )
 
-                    LazyColumn(
-                        contentPadding = PaddingValues(bottom = 20.dp)
-                    ) {
-                        items(statement.defects) { defect ->
-                            ShortDefectCard(defect = defect)
+                        LazyColumn {
+                            items(statement.defects) { defect ->
+                                ShortDefectCard(defect = defect)
+
+                                Spacer(modifier = Modifier.height(20.dp))
+                            }
                         }
                     }
                 }

@@ -5,7 +5,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 fun provideCreateDefectPresentationModule() = module {
-    viewModel {
-        CreateDefectViewModel()
+
+    viewModel {parameters ->
+        CreateDefectViewModel(
+            statementId = parameters.get(),
+            get()
+        )
     }
+
 }
