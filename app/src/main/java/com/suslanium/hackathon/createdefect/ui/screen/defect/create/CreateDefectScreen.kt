@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.screen.defect.create
+package com.suslanium.hackathon.createdefect.ui.screen.defect.create
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -31,13 +31,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.MapSelectionActivity
+import com.suslanium.hackathon.createdefect.ui.MapSelectionActivity
 import com.suslanium.hackathon.R
-import com.suslanium.hackathon.ui.common.AppOutlinedTextField
-import com.suslanium.hackathon.ui.common.PrimaryButton
-import com.suslanium.hackathon.ui.screen.defect.create.components.editableDefectImageList
-import com.suslanium.hackathon.ui.theme.DarkBlue
-import com.suslanium.hackathon.ui.theme.S20_W700
+import com.suslanium.hackathon.core.ui.common.AppOutlinedTextField
+import com.suslanium.hackathon.core.ui.common.PrimaryButton
+import com.suslanium.hackathon.createdefect.ui.screen.defect.create.components.editableDefectImageList
+import com.suslanium.hackathon.core.ui.theme.DarkBlue
+import com.suslanium.hackathon.core.ui.theme.S20_W700
 
 @Composable
 fun CreateDefectScreen() {

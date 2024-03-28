@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.screen.defect.create.components
+package com.suslanium.hackathon.createdefect.ui.screen.defect.create.components
 
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -25,9 +25,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.suslanium.hackathon.R
-import com.suslanium.hackathon.ui.theme.DarkBlue
-import com.suslanium.hackathon.ui.theme.Error
-import com.suslanium.hackathon.ui.theme.LightGray
+import com.suslanium.hackathon.core.ui.theme.DarkBlue
+import com.suslanium.hackathon.core.ui.theme.Error
+import com.suslanium.hackathon.core.ui.theme.LightGray
 
 fun LazyGridScope.editableDefectImageList(
     imageUris: SnapshotStateList<Uri>,

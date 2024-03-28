@@ -1,4 +1,4 @@
-package com.suslanium.hackathon
+package com.suslanium.hackathon.createdefect.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.suslanium.hackathon.R
 import com.suslanium.hackathon.databinding.ActivityMapSelectionBinding
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point

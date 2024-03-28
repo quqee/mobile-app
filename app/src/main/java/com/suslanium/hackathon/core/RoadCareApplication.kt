@@ -1,6 +1,7 @@
-package com.suslanium.hackathon
+package com.suslanium.hackathon.core
 
 import android.app.Application
+import com.suslanium.hackathon.BuildConfig
 import com.yandex.mapkit.MapKitFactory
 
 class RoadCareApplication : Application() {

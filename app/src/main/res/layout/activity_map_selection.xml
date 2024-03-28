@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapSelectionActivity">
+    tools:context=".createdefect.ui.MapSelectionActivity">
 
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapView"
