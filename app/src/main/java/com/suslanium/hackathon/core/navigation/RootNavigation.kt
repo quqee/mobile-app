@@ -84,6 +84,9 @@ fun RootNavigation(
                 statementId = statementId,
                 onNavigateAfterSuccess = {
                     navController.popBackStack()
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
                 }
             )
         }

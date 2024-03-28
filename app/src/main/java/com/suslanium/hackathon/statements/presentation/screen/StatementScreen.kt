@@ -3,7 +3,6 @@ package com.suslanium.hackathon.statements.presentation.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -135,11 +134,11 @@ fun StatementScreen(
                             color = DarkBlue
                         )
 
-                        LazyColumn(
-                            contentPadding = PaddingValues(bottom = 20.dp)
-                        ) {
+                        LazyColumn {
                             items(statement.defects) { defect ->
                                 ShortDefectCard(defect = defect)
+
+                                Spacer(modifier = Modifier.height(20.dp))
                             }
                         }
                     }

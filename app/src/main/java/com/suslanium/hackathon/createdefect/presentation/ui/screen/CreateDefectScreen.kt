@@ -17,14 +17,16 @@ import com.suslanium.hackathon.createdefect.presentation.ui.state.CreateDefectSc
 import com.suslanium.hackathon.createdefect.presentation.ui.state.CreateDefectSectionState
 import com.suslanium.hackathon.createdefect.presentation.ui.state.DefectCreationEvent
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun CreateDefectScreen(
     statementId: String,
-    onNavigateAfterSuccess: () -> Unit
+    onNavigateAfterSuccess: () -> Unit,
+    onNavigateBack: () -> Unit,
 ) {
     val context = LocalContext.current
-    val viewModel: CreateDefectViewModel = koinViewModel()
+    val viewModel: CreateDefectViewModel = koinViewModel(parameters = { parametersOf(statementId) })
     val screenState by remember {
         viewModel.screenState
     }
@@ -41,7 +43,10 @@ fun CreateDefectScreen(
 
     Crossfade(targetState = screenState, label = "") {
         when (it) {
-            CreateDefectScreenState.Content -> CreateDefectContent(viewModel = viewModel)
+            CreateDefectScreenState.Content -> CreateDefectContent(
+                viewModel = viewModel,
+                onNavigateBack = onNavigateBack
+            )
             CreateDefectScreenState.Error -> ErrorContent(onRetry = viewModel::loadDefectTypes)
             CreateDefectScreenState.Loading -> LoadingContent()
         }
@@ -51,7 +56,10 @@ fun CreateDefectScreen(
 }
 
 @Composable
-fun CreateDefectContent(viewModel: CreateDefectViewModel) {
+fun CreateDefectContent(
+    viewModel: CreateDefectViewModel,
+    onNavigateBack: () -> Unit,
+) {
     val section by remember { viewModel.sectionState }
     val defectTypes by remember { viewModel.defectTypes }
 
@@ -63,7 +71,10 @@ fun CreateDefectContent(viewModel: CreateDefectViewModel) {
                 onBack = viewModel::openGeneralContent
             )
 
-            CreateDefectSectionState.GeneralContent -> GeneralInfoContent(viewModel = viewModel)
+            CreateDefectSectionState.GeneralContent -> GeneralInfoContent(
+                viewModel = viewModel,
+                onBack = onNavigateBack
+            )
         }
     }
 }
