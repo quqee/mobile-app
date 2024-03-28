@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Hackathon</string>
+    <string name="appName">RoadCare</string>
+
+    // Onboarding
+    <string name="startDescription">Откажитесь от тонны письменной работы и автоматизируйте исправление дорожных дефектов в несколько кликов.</string>
+    <string name="logIn">Войти</string>
 </resources>
