@@ -1,5 +1,25 @@
 <resources>
-    <string name="app_name">Hackathon</string>
+    <string name="appName">RoadCare</string>
+
+    // Onboarding
+    <string name="startDescription">Откажитесь от тонны письменной работы и автоматизируйте исправление дорожных дефектов в несколько кликов.</string>
+    <string name="logIn">Войти</string>
+
+    // Bottom navigation
+    <string name="statements">Statements</string>
+    <string name="map">Map</string>
+    <string name="profile">Profile</string>
+
+    // Top bar
+    <string name="goBack">Go back</string>
+
+    // Auth
+    <string name="logInAuth">Вход</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="changePasswordVisibility">Изменить видимость пароля</string>
+    <string name="authError">Ошибка авторизации</string>
+
     <string name="creation_date">Дата создания:</string>
     <string name="road_length">Протяженность:</string>
     <string name="road_type">Тип дороги:</string>
