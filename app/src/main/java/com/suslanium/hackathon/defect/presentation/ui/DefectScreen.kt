@@ -13,7 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun DefectScreen(defectId: String) {
+fun DefectScreen(defectId: String, onCloseScreen: () -> Unit = {}) {
     val viewModel: DefectViewModel = koinViewModel {
         parametersOf(defectId)
     }
