@@ -39,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +53,6 @@ import com.suslanium.hackathon.core.ui.theme.DarkBlue
 import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S20_W700
 import com.suslanium.hackathon.core.ui.theme.VeryLightGray
-import com.suslanium.hackathon.core.ui.theme.White
 import com.suslanium.hackathon.defect.data.DefectModel
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition

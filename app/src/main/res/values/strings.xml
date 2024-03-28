@@ -35,6 +35,7 @@
     <string name="road_type">Тип дороги:</string>
     <string name="road_direction">Направление:</string>
     <string name="fixed">ИСПРАВЛЕН</string>
+    <string name="opened">ОТКРЫТ</string>
     <string name="in_progress">В РАБОТЕ</string>
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
@@ -44,4 +45,12 @@
     <string name="defect">Дефект</string>
     <string name="work_result">Результаты работы</string>
     <string name="square_meters">%1$s м\u00B2</string>
+
+    // Statements
+    <string name="createStatement">Создать ведомость</string>
+    <string name="statement">Ведомость</string>
+
+    // Defects
+    <string name="defects">Дефекты</string>
+    <string name="order">Поручение</string>
 </resources>

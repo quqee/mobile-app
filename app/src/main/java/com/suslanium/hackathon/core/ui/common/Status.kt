@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CropFree
 import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Done
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.core.ui.theme.Error
 import com.suslanium.hackathon.core.ui.theme.Green
+import com.suslanium.hackathon.core.ui.theme.LightGray
 import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S12_W400
 import com.suslanium.hackathon.core.ui.theme.Yellow
@@ -56,12 +58,18 @@ fun StatusElement(modifier: Modifier = Modifier, status: Status) {
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.cancelled), style = S12_W400, color = Error)
             }
+
+            Status.OPENED -> {
+                Icon(imageVector = Icons.Default.CropFree, contentDescription = null, tint = LightGray)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = stringResource(R.string.opened), style = S12_W400, color = LightGray)
+            }
         }
     }
 }
 
 enum class Status {
-    DONE, IN_PROGRESS, CANCELLED, WAITING,
+    DONE, IN_PROGRESS, CANCELLED, WAITING, OPENED
 }
 
 @Preview
@@ -72,5 +80,6 @@ private fun StatusPreview() {
         StatusElement(status = Status.WAITING)
         StatusElement(status = Status.IN_PROGRESS)
         StatusElement(status = Status.CANCELLED)
+        StatusElement(status = Status.OPENED)
     }
 }
