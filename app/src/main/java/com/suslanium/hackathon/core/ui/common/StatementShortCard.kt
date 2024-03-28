@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.ui.theme.BlueGray
-import com.suslanium.hackathon.ui.theme.LightGray
-import com.suslanium.hackathon.ui.theme.S14_W400
-import com.suslanium.hackathon.ui.theme.S16_W700
+import com.suslanium.hackathon.core.ui.theme.BlueGray
+import com.suslanium.hackathon.core.ui.theme.LightGray
+import com.suslanium.hackathon.core.ui.theme.S14_W400
+import com.suslanium.hackathon.core.ui.theme.S16_W700
 
 @Composable
 fun StatementShortCard(

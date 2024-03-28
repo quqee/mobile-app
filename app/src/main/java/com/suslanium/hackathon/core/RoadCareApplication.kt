@@ -2,6 +2,7 @@ package com.suslanium.hackathon.core
 
 import android.app.Application
 import com.suslanium.hackathon.di.providePresentationModule
+import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,7 +13,8 @@ class RoadCareApplication : Application() {
         startKoin {
             androidContext(this@RoadCareApplication)
             modules(
-                providePresentationModule()
+                providePresentationModule(),
+                profileProvidePresentationModule()
             )
         }
     }

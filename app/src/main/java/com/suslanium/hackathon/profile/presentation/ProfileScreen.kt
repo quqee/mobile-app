@@ -20,14 +20,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.suslanium.hackathon.R
-import com.suslanium.hackathon.ui.theme.BlueGray
-import com.suslanium.hackathon.ui.theme.Primary
-import com.suslanium.hackathon.ui.theme.S14_W400
-import com.suslanium.hackathon.ui.theme.S15_W600
-import com.suslanium.hackathon.ui.theme.S20_W700
+import com.suslanium.hackathon.core.ui.theme.BlueGray
+import com.suslanium.hackathon.core.ui.theme.Primary
+import com.suslanium.hackathon.core.ui.theme.S14_W400
+import com.suslanium.hackathon.core.ui.theme.S15_W600
+import com.suslanium.hackathon.core.ui.theme.S20_W700
 
 @Composable
-fun ProfileScreen(viewModel: ProfileScreenViewModel) {
+fun ProfileScreen(viewModel: ProfileViewModel) {
     val name by viewModel.name
     val company by viewModel.company
     val role by viewModel.companyRole
@@ -46,9 +46,11 @@ fun ProfileScreen(viewModel: ProfileScreenViewModel) {
         Text(
             text = name, style = S20_W700
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = company, style = S14_W400, color = BlueGray
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(text = role, style = S14_W400, color = BlueGray)
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -67,5 +69,5 @@ fun ProfileScreen(viewModel: ProfileScreenViewModel) {
 @Preview
 @Composable
 private fun ProfileScreenPreview() {
-
+    ProfileScreen(viewModel = ProfileViewModel())
 }
