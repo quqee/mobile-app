@@ -39,5 +39,13 @@
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
     <string name="not_found">Сотрудник не найден</string>
-    <string name="opened">ОТКРЫТО</string>
+
+    // Statements
+    <string name="createStatement">Создать ведомость</string>
+    <string name="statement">Ведомость</string>
+
+    // Defects
+    <string name="defects">Дефекты</string>
+    <string name="defect">Дефект</string>
+    <string name="order">Поручение</string>
 </resources>

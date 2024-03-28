@@ -18,7 +18,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.suslanium.hackathon.auth.presentation.AuthScreen
-import com.suslanium.hackathon.createdefect.presentation.ui.screen.CreateDefectScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
 
 object RoadCareDestinations {
@@ -26,6 +25,7 @@ object RoadCareDestinations {
     const val ONBOARDING = "onboarding"
     const val AUTH = "auth"
     const val CREATE_DEFECT = "create_defect"
+    const val STATEMENT = "statement"
 
     // Bottom navigation
     const val STATEMENTS = "statements"
@@ -70,6 +70,23 @@ fun RootNavigation(
             CreateDefectScreen {
                 navController.popBackStack()
             }
+        }
+        composable(
+            route = "${RoadCareDestinations.STATEMENT}/{statementId}",
+            arguments = listOf(
+                navArgument("statementId") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
+
+            StatementScreen(
+                statementId = statementId,
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

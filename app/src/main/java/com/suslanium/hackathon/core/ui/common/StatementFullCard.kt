@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.common
+package com.suslanium.hackathon.core.ui.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,7 @@ import com.suslanium.hackathon.core.ui.theme.S16_W700
 
 @Composable
 fun StatementFullCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     roadName: String,
     category: String,
     date: String,
