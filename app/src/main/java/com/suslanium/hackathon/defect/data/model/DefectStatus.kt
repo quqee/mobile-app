@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.defect.data
+package com.suslanium.hackathon.defect.data.model
 
 import com.suslanium.hackathon.core.ui.common.Status
 
