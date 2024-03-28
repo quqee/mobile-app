@@ -15,10 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.suslanium.hackathon.auth.presentation.AuthScreen
+import com.suslanium.hackathon.createdefect.presentation.ui.screen.CreateDefectScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
+import com.suslanium.hackathon.statements.presentation.screen.StatementScreen
 
 object RoadCareDestinations {
     // Root

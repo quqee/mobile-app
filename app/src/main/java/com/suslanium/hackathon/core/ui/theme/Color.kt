@@ -18,3 +18,5 @@ val RejectedStatusColor = Color(0xFFFF647C)
 val WaitingStatusColor = Color(0xFF0084F4)
 val InProgressStatusColor = Color(0xFFFFCF5C)
 val CompletedStatusColor = Color(0xFF00C48C)
+
+val DividerColor = Color(0xFFF5F5F5)

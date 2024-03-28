@@ -35,6 +35,7 @@
     <string name="road_type">Тип дороги:</string>
     <string name="road_direction">Направление:</string>
     <string name="fixed">ИСПРАВЛЕН</string>
+    <string name="opened">ОТКРЫТ</string>
     <string name="in_progress">В РАБОТЕ</string>
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>

@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Route
@@ -32,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +41,6 @@ import com.suslanium.hackathon.core.ui.common.Status
 import com.suslanium.hackathon.core.ui.common.StatusElement
 import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S20_W700
-import com.suslanium.hackathon.core.ui.theme.White
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
