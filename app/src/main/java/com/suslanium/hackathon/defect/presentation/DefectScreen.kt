@@ -2,6 +2,7 @@ package com.suslanium.hackathon.defect.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
@@ -19,47 +21,91 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Route
-import androidx.compose.material.icons.filled.ViewInAr
+import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.Route
+import androidx.compose.material.icons.outlined.ViewInAr
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import coil.compose.rememberAsyncImagePainter
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.core.ui.common.Status
 import com.suslanium.hackathon.core.ui.common.StatusElement
+import com.suslanium.hackathon.core.ui.theme.DarkBlue
 import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S20_W700
+import com.suslanium.hackathon.core.ui.theme.VeryLightGray
+import com.suslanium.hackathon.core.ui.theme.White
+import com.suslanium.hackathon.defect.data.DefectModel
+import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.search.Response
+import com.yandex.mapkit.search.SearchFactory
+import com.yandex.mapkit.search.SearchManagerType
+import com.yandex.mapkit.search.SearchOptions
+import com.yandex.mapkit.search.Session
+import com.yandex.runtime.Error
+
+val searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DefectScreen() {
-    val state = rememberPagerState(pageCount = { 3 })
-    val status = Status.IN_PROGRESS
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(
-            contentColor = White,
-            containerColor = Primary,
-            onClick = { },
-        ) {
-            Icon(Icons.Filled.Edit, "Floating action button.")
+fun DefectScreen(
+    model: DefectModel,
+    onEditClick: () -> Unit = {},
+) {
+    val lifeCycleState by LocalLifecycleOwner.current.lifecycle.observeAsState()
+    val context = LocalContext.current
+    val state = rememberPagerState(pageCount = { model.picturesBeforeRepair.size })
+    var addressValue by remember {
+        mutableStateOf(context.getString(R.string.loading))
+    }
+    val searchSessionListener = object : Session.SearchListener {
+        override fun onSearchResponse(response: Response) {
+            addressValue = if (response.collection.children.isNotEmpty()) {
+                val name = response.collection.children[0].obj?.name
+                val desc = response.collection.children[0].obj?.descriptionText
+                if (name == null && desc == null) context.getString(R.string.error_address)
+                else if (name != null && desc != null) "$name, $desc"
+                else name ?: (desc ?: context.getString(R.string.error_address))
+            } else context.getString(R.string.error_address)
         }
-    }) {
+
+        override fun onSearchError(error: Error) {
+            addressValue = context.getString(R.string.error_address)
+        }
+    }
+    LaunchedEffect(lifeCycleState) {
+        when (lifeCycleState) {
+            Lifecycle.Event.ON_RESUME -> searchManager.submit(
+                Point(model.latitude, model.longitude), 17, SearchOptions(), searchSessionListener
+            )
+
+            else -> Unit
+        }
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
                 .verticalScroll(rememberScrollState())
         ) {
             Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth()) {
@@ -69,9 +115,11 @@ fun DefectScreen() {
                         .height(300.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        painter = rememberAsyncImagePainter(model = model.picturesBeforeRepair[it]),
                         contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(VeryLightGray),
                         contentDescription = null
                     )
                 }
@@ -90,58 +138,85 @@ fun DefectScreen() {
             }
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "Дефект",
+                text = stringResource(id = R.string.defect),
                 style = S20_W700,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                color = DarkBlue
             )
             Spacer(modifier = Modifier.height(40.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
-                Icon(Icons.Default.Route, contentDescription = null)
+                Icon(
+                    Icons.Outlined.Route, contentDescription = null, tint = DarkBlue
+                )
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Поперечная трещина")
+                Text(
+                    text = model.defectType, color = DarkBlue
+                )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
-                Icon(Icons.Default.LocationOn, contentDescription = null)
+                Icon(Icons.Outlined.LocationOn, contentDescription = null, tint = DarkBlue)
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Вожовский переулок, Кромы, Стрелецкое сельское поселение, Кромской район, Орловская область, Центральный федеральный округ, 303210, Россия")
+                Text(
+                    text = "$addressValue (${model.latitude}-${model.longitude})", color = DarkBlue
+                )
             }
-            Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
-                Icon(Icons.Default.ViewInAr, contentDescription = null)
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Вожовский переулок, Кромы, Стрелецкое сельское поселение, Кромской район, Орловская область, Центральный федеральный округ, 303210, Россия")
+
+            if (model.defectDistance != null) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                ) {
+                    Icon(Icons.Outlined.ViewInAr, contentDescription = null, tint = DarkBlue)
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = stringResource(
+                            id = R.string.square_meters, model.defectDistance.toString()
+                        ), color = DarkBlue
+                    )
+                }
             }
+
             Spacer(modifier = Modifier.height(16.dp))
-            // TODO add map
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = null,
-                contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(175.dp)
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(16.dp))
+            Box {
+                MapView(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(175.dp)
+                        .padding(horizontal = 16.dp)
+                        .clip(RoundedCornerShape(16.dp)), startCameraPosition = CameraPosition(
+                        Point(model.latitude, model.longitude), 17.0f, 150.0f, 30.0f
+                    )
+                )
+                Image(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(50.dp),
+                    painter = painterResource(id = R.drawable.map_location_icon),
+                    contentDescription = null
+                )
+            }
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+            StatusElement(
+                modifier = Modifier.padding(start = 16.dp), status = model.status.statusAlternative
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            StatusElement(modifier = Modifier.padding(start = 16.dp), status = status)
-            if (status == Status.DONE) {
+            if (model.status.statusAlternative == Status.DONE) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Результаты работы",
+                    text = stringResource(id = R.string.work_result),
                     style = S20_W700,
-                    modifier = Modifier.padding(start = 16.dp)
+                    modifier = Modifier.padding(start = 16.dp),
+                    color = DarkBlue
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyRow(
@@ -149,27 +224,37 @@ fun DefectScreen() {
                         start = 16.dp, end = 16.dp
                     )
                 ) {
-                    items(4) {
+                    items(model.picturesAfterRepair.size) {
                         Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            painter = rememberAsyncImagePainter(model = model.picturesAfterRepair[it]),
                             contentDescription = null,
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop,
                             modifier = Modifier
                                 .height(140.dp)
                                 .width(157.dp)
                                 .clip(shape = RoundedCornerShape(16.dp))
+                                .background(VeryLightGray)
                         )
-                        if (it != 3) Spacer(modifier = Modifier.width(10.dp))
+                        if (it != model.picturesAfterRepair.size - 1) Spacer(
+                            modifier = Modifier.width(
+                                10.dp
+                            )
+                        )
                     }
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
-    }
-}
 
-@Preview
-@Composable
-private fun DefectScreenPreview() {
-    DefectScreen()
+        FloatingActionButton(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(all = 16.dp),
+            contentColor = White,
+            containerColor = Primary,
+            onClick = onEditClick,
+        ) {
+            Icon(Icons.Filled.Edit, null)
+        }
+    }
 }
