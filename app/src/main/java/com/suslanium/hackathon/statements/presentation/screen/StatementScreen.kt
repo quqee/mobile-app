@@ -1,6 +1,7 @@
 package com.suslanium.hackathon.statements.presentation.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -44,67 +45,52 @@ fun StatementScreen(
     statementId: String,
     onNavigateBack: () -> Unit,
     onNavigateToCreateDefect: (String) -> Unit,
+    onNavigateToDefect: (String) -> Unit,
     // TODO onNavigateToCreateOrder
     modifier: Modifier = Modifier
 ) {
     val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId) })
     val uiState by viewModel.statementUiState.collectAsStateWithLifecycle()
 
-    Scaffold(
-        topBar = {
-            RoadCareTopBar(
-                text = stringResource(id = R.string.statement),
-                onBackButtonClick = onNavigateBack
-            )
-        },
-        floatingActionButton = {
-            if (uiState is StatementUiState.Success) {
-                Column {
-                    ExtendedFloatingActionButton(
-                        text = {
-                            Text(
-                                text = stringResource(id = R.string.defect),
-                                style = S15_W600
-                            )
-                        },
-                        onClick = {
-                            onNavigateToCreateDefect(statementId)
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
-                                contentDescription = stringResource(id = R.string.createStatement),
-                            )
-                        },
-                        containerColor = Primary,
-                        contentColor = Color.White
+    Scaffold(topBar = {
+        RoadCareTopBar(
+            text = stringResource(id = R.string.statement), onBackButtonClick = onNavigateBack
+        )
+    }, floatingActionButton = {
+        if (uiState is StatementUiState.Success) {
+            Column {
+                ExtendedFloatingActionButton(text = {
+                    Text(
+                        text = stringResource(id = R.string.defect), style = S15_W600
                     )
-
-                    Spacer(modifier = Modifier.height(PaddingSmall))
-
-                    ExtendedFloatingActionButton(
-                        text = {
-                            Text(
-                                text = stringResource(id = R.string.order),
-                                style = S15_W600
-                            )
-                        },
-                        onClick = {
-                            // TODO navigate to add an order
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
-                                contentDescription = stringResource(id = R.string.createStatement),
-                            )
-                        },
-                        containerColor = Primary,
-                        contentColor = Color.White
+                }, onClick = {
+                    onNavigateToCreateDefect(statementId)
+                }, icon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
+                        contentDescription = stringResource(id = R.string.createStatement),
                     )
-                }
+                }, containerColor = Primary, contentColor = Color.White
+                )
+
+                Spacer(modifier = Modifier.height(PaddingSmall))
+
+                ExtendedFloatingActionButton(text = {
+                    Text(
+                        text = stringResource(id = R.string.order), style = S15_W600
+                    )
+                }, onClick = {
+                    // TODO navigate to add an order
+                }, icon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
+                        contentDescription = stringResource(id = R.string.createStatement),
+                    )
+                }, containerColor = Primary, contentColor = Color.White
+                )
             }
         }
-    ) {
+    }) {
         when (uiState) {
             StatementUiState.Initial -> Unit
             StatementUiState.Loading -> LoadingContent()
@@ -115,8 +101,7 @@ fun StatementScreen(
                     modifier = modifier
                         .padding(it)
                         .padding(horizontal = PaddingMedium)
-                        .background(Color.White),
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                        .background(Color.White), verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     StatementFullCard(
                         roadName = statement.areaName,
@@ -136,7 +121,9 @@ fun StatementScreen(
 
                         LazyColumn {
                             items(statement.defects) { defect ->
-                                ShortDefectCard(defect = defect)
+                                ShortDefectCard(modifier = Modifier.clickable {
+                                    onNavigateToDefect(defect.id)
+                                }, defect = defect)
 
                                 Spacer(modifier = Modifier.height(20.dp))
                             }
