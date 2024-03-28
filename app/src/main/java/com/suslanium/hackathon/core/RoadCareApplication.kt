@@ -1,6 +1,8 @@
 package com.suslanium.hackathon.core
 
 import android.app.Application
+import com.suslanium.hackathon.BuildConfig
+import com.yandex.mapkit.MapKitFactory
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
@@ -13,6 +15,7 @@ class RoadCareApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
         startKoin {
             androidContext(this@RoadCareApplication)
             modules(

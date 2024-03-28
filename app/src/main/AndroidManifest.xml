@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
@@ -14,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hackathon"
         tools:targetApi="31">
+        <activity
+            android:name=".createdefect.presentation.ui.MapSelectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hackathon" />
         <activity
             android:name=".core.MainActivity"
             android:exported="true"

@@ -1,4 +1,14 @@
 <resources>
+    <string name="new_defect">Новый дефект</string>
+    <string name="defect_type">Тип дефекта</string>
+    <string name="coordinates">Координаты</string>
+    <string name="volume">Объём (кв.м)</string>
+    <string name="upload_photo">Загрузить фотографии</string>
+    <string name="add_photo">Добавить фотографии</string>
+    <string name="create">Создать</string>
+    <string name="choose_defect_type">Выберите тип дефекта</string>
+    <string name="generic_error_msg">Что-то пошло не так, проверьте подключение к интернету или попробуйте повторить попытку позже.</string>
+    <string name="retry">Попробовать снова</string>
     <string name="appName">RoadCare</string>
 
     // Onboarding
