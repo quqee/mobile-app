@@ -39,4 +39,5 @@
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
     <string name="not_found">Сотрудник не найден</string>
+    <string name="opened">ОТКРЫТО</string>
 </resources>
