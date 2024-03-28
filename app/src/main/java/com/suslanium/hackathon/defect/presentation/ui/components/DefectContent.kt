@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.defect.presentation
+package com.suslanium.hackathon.defect.presentation.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -53,7 +53,7 @@ import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S20_W700
 import com.suslanium.hackathon.core.ui.theme.VeryLightGray
 import com.suslanium.hackathon.core.ui.theme.White
-import com.suslanium.hackathon.defect.data.DefectModel
+import com.suslanium.hackathon.defect.data.model.DefectModel
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.search.Response
@@ -67,7 +67,7 @@ val searchManager = SearchFactory.getInstance().createSearchManager(SearchManage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DefectScreen(
+fun DefectContent(
     model: DefectModel,
     onEditClick: () -> Unit = {},
 ) {
