@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.createdefect.ui.screen.defect.create.components
+package com.suslanium.hackathon.createdefect.presentation.ui.screen.components
 
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher

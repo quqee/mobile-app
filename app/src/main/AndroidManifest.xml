@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Hackathon"
         tools:targetApi="31">
         <activity
-            android:name=".createdefect.ui.MapSelectionActivity"
+            android:name=".createdefect.presentation.ui.MapSelectionActivity"
             android:exported="false"
             android:theme="@style/Theme.Hackathon" />
         <activity

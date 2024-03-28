@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.createdefect.ui
+package com.suslanium.hackathon.createdefect.presentation.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -56,7 +56,7 @@ class MapSelectionActivity : AppCompatActivity() {
 
     private lateinit var imageProvider: ImageProvider
 
-    private val iconStyle = IconStyle().setScale(10f)
+    private val iconStyle = IconStyle().setScale(0.33f)
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 

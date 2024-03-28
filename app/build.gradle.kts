@@ -78,4 +78,7 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.maps.mobile)
+
+    //Temporary
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }

@@ -1,6 +1,6 @@
-package com.suslanium.hackathon.createdefect.ui.screen.defect.create
+package com.suslanium.hackathon.createdefect.presentation.ui.screen.components
 
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -18,10 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -31,24 +28,37 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.createdefect.ui.MapSelectionActivity
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.core.ui.common.AppOutlinedTextField
 import com.suslanium.hackathon.core.ui.common.PrimaryButton
-import com.suslanium.hackathon.createdefect.ui.screen.defect.create.components.editableDefectImageList
 import com.suslanium.hackathon.core.ui.theme.DarkBlue
 import com.suslanium.hackathon.core.ui.theme.S20_W700
+import com.suslanium.hackathon.createdefect.presentation.CreateDefectViewModel
+import com.suslanium.hackathon.createdefect.presentation.ui.MapSelectionActivity
 
 @Composable
-fun CreateDefectScreen() {
+fun GeneralInfoContent(viewModel: CreateDefectViewModel, onBack: () -> Unit = {}) {
     val context = LocalContext.current
-    val imageUris = remember { mutableStateListOf<Uri>() }
-    var latitude by remember {
-        mutableStateOf<Double?>(null)
+    val imageUris = remember { viewModel.fileUris }
+    val latitude by remember {
+        viewModel.latitude
     }
-    var longitude by remember {
-        mutableStateOf<Double?>(null)
+    val longitude by remember {
+        viewModel.longitude
     }
+    val defectType by remember {
+        viewModel.defectType
+    }
+    val dataIsCorrectlyFilled by remember {
+        viewModel.dataIsCorrectlyFilledIn
+    }
+    val defectDistance by remember {
+        viewModel.defectDistance
+    }
+    val defectDistanceIsCorrectlyFilled by remember {
+        viewModel.distanceIsCorrectlyFilled
+    }
+
     val replaceLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents(),
         onResult = { uri: List<Uri> ->
@@ -62,15 +72,20 @@ fun CreateDefectScreen() {
         })
     val coordinatesLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode != RESULT_OK) return@rememberLauncherForActivityResult
-            latitude = result.data?.extras?.getDouble(MapSelectionActivity.LATITUDE)
-            longitude = result.data?.extras?.getDouble(MapSelectionActivity.LONGITUDE)
+            if (result.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
+            viewModel.setCoordinates(
+                result.data?.extras?.getDouble(MapSelectionActivity.LATITUDE),
+                result.data?.extras?.getDouble(MapSelectionActivity.LONGITUDE)
+            )
+
         }
 
     Column(modifier = Modifier.padding(all = 16.dp)) {
-        IconButton(modifier = Modifier
-            .align(Alignment.Start)
-            .size(24.dp), onClick = { /*TODO*/ }) {
+        IconButton(
+            modifier = Modifier
+                .align(Alignment.Start)
+                .size(24.dp), onClick = onBack
+        ) {
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.chevron_left),
                 contentDescription = null,
@@ -86,8 +101,14 @@ fun CreateDefectScreen() {
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(20.dp))
-        AppOutlinedTextField(value = "",
+        AppOutlinedTextField(modifier = Modifier.pointerInput(Unit) {
+            detectTapGestures {
+                viewModel.openTypeSelection()
+            }
+        },
+            value = defectType?.name ?: "",
             onValueChange = {},
+            enabled = false,
             label = stringResource(id = R.string.defect_type),
             trailingIcon = {
                 Icon(
@@ -111,12 +132,18 @@ fun CreateDefectScreen() {
                     contentDescription = null
                 )
             })
-        Spacer(modifier = Modifier.height(20.dp))
-        AppOutlinedTextField(
-            value = "", onValueChange = {}, label = stringResource(id = R.string.volume)
-        )
-        Spacer(modifier = Modifier.height(20.dp))
 
+        if (defectType != null && defectType?.hasDistance == true) {
+            Spacer(modifier = Modifier.height(20.dp))
+            AppOutlinedTextField(
+                value = defectDistance,
+                onValueChange = viewModel::setDefectDistance,
+                label = stringResource(id = R.string.volume),
+                isError = !defectDistanceIsCorrectlyFilled
+            )
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
         if (imageUris.isEmpty()) {
             PrimaryButton(text = stringResource(id = R.string.upload_photo),
                 onClick = { replaceLauncher.launch("image/*") })
@@ -125,7 +152,11 @@ fun CreateDefectScreen() {
                 editableDefectImageList(imageUris, addLauncher)
             }
 
-            PrimaryButton(text = stringResource(id = R.string.create))
+            PrimaryButton(
+                text = stringResource(id = R.string.create),
+                enabled = dataIsCorrectlyFilled,
+                onClick = viewModel::createDefect
+            )
         }
     }
 }
