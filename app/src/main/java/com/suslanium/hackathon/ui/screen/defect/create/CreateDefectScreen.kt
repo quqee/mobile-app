@@ -1,8 +1,10 @@
 package com.suslanium.hackathon.ui.screen.defect.create
 
+import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -19,10 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.suslanium.hackathon.MapSelectionActivity
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.ui.common.AppOutlinedTextField
 import com.suslanium.hackathon.ui.common.PrimaryButton
@@ -32,18 +37,19 @@ import com.suslanium.hackathon.ui.theme.S20_W700
 
 @Composable
 fun CreateDefectScreen() {
+    val context = LocalContext.current
     val imageUris = remember { mutableStateListOf<Uri>() }
-    val replaceLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetMultipleContents(),
-            onResult = { uri: List<Uri> ->
-                imageUris.clear()
-                imageUris.addAll(uri)
-            })
-    val addLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetMultipleContents(),
-            onResult = { uri: List<Uri> ->
-                imageUris.addAll(uri)
-            })
+    val replaceLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents(),
+        onResult = { uri: List<Uri> ->
+            imageUris.clear()
+            imageUris.addAll(uri)
+        })
+    val addLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents(),
+        onResult = { uri: List<Uri> ->
+            imageUris.addAll(uri)
+        })
 
     Column(modifier = Modifier.padding(all = 16.dp)) {
         IconButton(modifier = Modifier
@@ -74,7 +80,13 @@ fun CreateDefectScreen() {
                 )
             })
         Spacer(modifier = Modifier.height(20.dp))
-        AppOutlinedTextField(value = "",
+        AppOutlinedTextField(modifier = Modifier.pointerInput(Unit) {
+            detectTapGestures {
+                context.startActivity(Intent(context, MapSelectionActivity::class.java))
+            }
+        },
+            enabled = false,
+            value = "",
             onValueChange = {},
             label = stringResource(id = R.string.coordinates),
             trailingIcon = {
