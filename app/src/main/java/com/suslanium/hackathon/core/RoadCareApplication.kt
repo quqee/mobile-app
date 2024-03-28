@@ -1,11 +1,16 @@
 package com.suslanium.hackathon.core
 
 import android.app.Application
+import com.suslanium.hackathon.BuildConfig
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
+import com.suslanium.hackathon.createdefect.di.provideCreateDefectPresentationModule
 import com.suslanium.hackathon.di.providePresentationModule
 import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
+import com.suslanium.hackathon.statements.di.provideStatementsDataModule
+import com.suslanium.hackathon.statements.di.provideStatementsPresentationModule
+import com.yandex.mapkit.MapKitFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
