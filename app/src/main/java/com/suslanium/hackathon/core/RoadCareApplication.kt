@@ -5,6 +5,7 @@ import com.suslanium.hackathon.BuildConfig
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
+import com.suslanium.hackathon.createdefect.di.provideCreateDefectDataModule
 import com.suslanium.hackathon.createdefect.di.provideCreateDefectPresentationModule
 import com.suslanium.hackathon.defect.di.defectProvidePresentationModule
 import com.suslanium.hackathon.defect.di.provideDefectDataModule
@@ -39,7 +40,9 @@ class RoadCareApplication : Application() {
                 provideCreateDefectPresentationModule(),
 
                 provideDefectDataModule(),
-                defectProvidePresentationModule()
+                defectProvidePresentationModule(),
+                provideCreateDefectDataModule(),
+                provideCreateDefectPresentationModule(),
             )
         }
     }

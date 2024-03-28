@@ -20,8 +20,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CreateDefectViewModel(private val repository: CreateDefectRepository = CreateDefectRepository()) :
-    ViewModel() {
+class CreateDefectViewModel(
+    private val statementId: String,
+    private val repository: CreateDefectRepository
+) : ViewModel() {
 
     val latitude: State<Double?>
         get() = _latitude
@@ -103,6 +105,7 @@ class CreateDefectViewModel(private val repository: CreateDefectRepository = Cre
         _screenState.value = CreateDefectScreenState.Loading
         viewModelScope.launch(Dispatchers.IO + creationExceptionHandler) {
             val model = CreateDefectModel(
+                statementId = statementId,
                 latitude = latitude.value!!,
                 longitude = longitude.value!!,
                 defectType = defectType.value!!,
