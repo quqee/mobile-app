@@ -39,4 +39,9 @@
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
     <string name="not_found">Сотрудник не найден</string>
+    <string name="loading">Загрузка</string>
+    <string name="error_address">Не удалось загрузить адрес</string>
+    <string name="defect">Дефект</string>
+    <string name="work_result">Результаты работы</string>
+    <string name="square_meters">%1$s м\u00B2</string>
 </resources>

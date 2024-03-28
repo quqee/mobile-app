@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.IncompleteCircle
-import androidx.compose.material.icons.filled.Timeline
+import androidx.compose.material.icons.outlined.AccessTime
+import androidx.compose.material.icons.outlined.Cancel
+import androidx.compose.material.icons.outlined.Done
+import androidx.compose.material.icons.outlined.IncompleteCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,20 +29,20 @@ fun StatusElement(modifier: Modifier = Modifier, status: Status) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
         when (status) {
             Status.DONE -> {
-                Icon(imageVector = Icons.Default.Done, contentDescription = null, tint = Green)
+                Icon(imageVector = Icons.Outlined.Done, contentDescription = null, tint = Green)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.fixed), color = Green)
             }
 
             Status.IN_PROGRESS -> {
-                Icon(imageVector = Icons.Default.Timeline, contentDescription = null, tint = Yellow)
+                Icon(imageVector = Icons.Outlined.AccessTime, contentDescription = null, tint = Yellow)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.in_progress), color = Yellow)
             }
 
             Status.WAITING -> {
                 Icon(
-                    imageVector = Icons.Default.IncompleteCircle,
+                    imageVector = Icons.Outlined.IncompleteCircle,
                     contentDescription = null,
                     tint = Primary
                 )
@@ -52,7 +52,7 @@ fun StatusElement(modifier: Modifier = Modifier, status: Status) {
 
             Status.CANCELLED -> {
 
-                Icon(imageVector = Icons.Default.Cancel, contentDescription = null, tint = Error)
+                Icon(imageVector = Icons.Outlined.Cancel, contentDescription = null, tint = Error)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.cancelled), style = S12_W400, color = Error)
             }

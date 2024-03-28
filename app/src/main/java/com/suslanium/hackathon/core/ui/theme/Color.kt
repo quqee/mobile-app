@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val DarkBlue = Color(0xFF0D1B34)
 val LightGray = Color(0xFF909499)
+val VeryLightGray = Color(0xFFC5CBD1)
 val Primary = Color(0xFF4894FE)
 val BlueGray = Color(0xFF8696BB)
 val PrimaryDisabled = Color(0xFFACCFFF)
