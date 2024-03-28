@@ -36,9 +36,11 @@ fun ShortDefectCard(
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
-        ), colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
-        ), modifier = modifier
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier

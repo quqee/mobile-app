@@ -19,7 +19,10 @@ import com.suslanium.hackathon.createdefect.presentation.ui.state.DefectCreation
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CreateDefectScreen(onNavigateAfterSuccess: () -> Unit) {
+fun CreateDefectScreen(
+    statementId: String,
+    onNavigateAfterSuccess: () -> Unit
+) {
     val context = LocalContext.current
     val viewModel: CreateDefectViewModel = koinViewModel()
     val screenState by remember {

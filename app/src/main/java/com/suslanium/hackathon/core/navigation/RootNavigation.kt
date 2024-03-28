@@ -70,10 +70,22 @@ fun RootNavigation(
                 onCloseApp = onCloseApp
             )
         }
-        composable(RoadCareDestinations.CREATE_DEFECT) {
-            CreateDefectScreen {
-                navController.popBackStack()
-            }
+        composable(
+            route = "${RoadCareDestinations.CREATE_DEFECT}/{statementId}",
+            arguments = listOf(
+                navArgument("statementId") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
+
+            CreateDefectScreen(
+                statementId = statementId,
+                onNavigateAfterSuccess = {
+                    navController.popBackStack()
+                }
+            )
         }
         composable(
             route = "${RoadCareDestinations.STATEMENT}/{statementId}",
@@ -89,6 +101,9 @@ fun RootNavigation(
                 statementId = statementId,
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToCreateDefect = {
+                    navController.navigate("${RoadCareDestinations.CREATE_DEFECT}/$it")
                 }
             )
         }
