@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hackathon</string>
+    <string name="creation_date">Дата создания:</string>
+    <string name="road_length">Протяженность:</string>
+    <string name="road_type">Тип дороги:</string>
+    <string name="road_direction">Направление:</string>
 </resources>
