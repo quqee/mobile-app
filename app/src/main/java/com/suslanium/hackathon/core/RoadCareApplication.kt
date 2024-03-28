@@ -5,6 +5,7 @@ import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
 import com.suslanium.hackathon.di.providePresentationModule
+import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -16,11 +17,13 @@ class RoadCareApplication : Application() {
             androidContext(this@RoadCareApplication)
             modules(
                 providePresentationModule(),
-
+              
                 provideCoreDataModule(),
 
                 provideAuthDataModule(),
-                provideAuthPresentationModule()
+                provideAuthPresentationModule(),
+              
+                profileProvidePresentationModule()
             )
         }
     }

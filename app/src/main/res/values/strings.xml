@@ -19,4 +19,14 @@
     <string name="password">Пароль</string>
     <string name="changePasswordVisibility">Изменить видимость пароля</string>
     <string name="authError">Ошибка авторизации</string>
+
+    <string name="creation_date">Дата создания:</string>
+    <string name="road_length">Протяженность:</string>
+    <string name="road_type">Тип дороги:</string>
+    <string name="road_direction">Направление:</string>
+    <string name="fixed">ИСПРАВЛЕН</string>
+    <string name="in_progress">В РАБОТЕ</string>
+    <string name="waiting">В ОЖИДАНИИ</string>
+    <string name="cancelled">ОТМЕНЕН</string>
+    <string name="not_found">Сотрудник не найден</string>
 </resources>
