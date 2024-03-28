@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.suslanium.hackathon.statements.presentation.StatementsScreen
+import com.suslanium.hackathon.statements.presentation.screen.StatementsScreen
 
 @Composable
 fun BottomNavigation(

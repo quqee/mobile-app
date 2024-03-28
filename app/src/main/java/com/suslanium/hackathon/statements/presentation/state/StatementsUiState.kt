@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.statements.presentation
+package com.suslanium.hackathon.statements.presentation.state
 
 import com.suslanium.hackathon.statements.data.model.StatementResponseDto
 

@@ -1,9 +1,10 @@
-package com.suslanium.hackathon.statements.presentation
+package com.suslanium.hackathon.statements.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.suslanium.hackathon.auth.data.repository.AuthRepository
 import com.suslanium.hackathon.statements.data.repository.StatementRepository
+import com.suslanium.hackathon.statements.presentation.state.StatementsUiState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
