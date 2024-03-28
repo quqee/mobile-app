@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.suslanium.hackathon.statements.presentation.StatementsScreen
 
 @Composable
 fun BottomNavigation(
@@ -18,11 +19,7 @@ fun BottomNavigation(
         startDestination = RoadCareDestinations.STATEMENTS
     ) {
         composable(RoadCareDestinations.STATEMENTS) {
-            PlaceholderScreen(
-                text = "statements",
-                onButtonClick = {},
-                buttonText = "placeholder"
-            )
+            StatementsScreen()
         }
         composable(RoadCareDestinations.MAP) {
             PlaceholderScreen(

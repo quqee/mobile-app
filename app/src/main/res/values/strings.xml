@@ -29,4 +29,7 @@
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
     <string name="not_found">Сотрудник не найден</string>
+
+    // Statements
+    <string name="createStatement">Создать ведомость</string>
 </resources>

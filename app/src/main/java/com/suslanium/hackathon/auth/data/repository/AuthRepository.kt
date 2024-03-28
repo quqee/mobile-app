@@ -2,6 +2,7 @@ package com.suslanium.hackathon.auth.data.repository
 
 import com.suslanium.hackathon.core.data.api.AuthApiService
 import com.suslanium.hackathon.auth.data.model.LoginRequest
+import com.suslanium.hackathon.core.Constants.ERROR_STRING
 import com.suslanium.hackathon.core.data.datasource.TokenDataSource
 import com.suslanium.hackathon.core.data.model.RefreshRequest
 import com.suslanium.hackathon.core.data.model.TokenType
@@ -30,10 +31,5 @@ class AuthRepository(
         val refreshToken = tokenDataSource.fetchToken(TokenType.REFRESH)
         authApiService.logout(RefreshRequest(refreshToken ?: ERROR_STRING))
         tokenDataSource.removeTokens()
-    }
-
-
-    private companion object {
-        const val ERROR_STRING = "error"
     }
 }
