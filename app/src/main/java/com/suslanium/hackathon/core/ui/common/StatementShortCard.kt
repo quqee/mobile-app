@@ -29,17 +29,22 @@ import com.suslanium.hackathon.core.ui.theme.S16_W700
 @Composable
 fun StatementShortCard(
     modifier: Modifier = Modifier,
+    id: String,
     roadName: String,
     category: String,
     date: String,
-    distance: String
+    distance: String,
+    onNavigateToStatement: (String) -> Unit
 ) {
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
         ), colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
-        ), modifier = modifier
+        ), modifier = modifier,
+        onClick = {
+            onNavigateToStatement(id)
+        }
     ) {
         Column(
             modifier = Modifier
@@ -108,7 +113,9 @@ private fun CardPreview() {
             roadName = "Московское шоссе",
             category = "Автомобильная дорога",
             date = "12.12.2021",
-            distance = "20 км"
+            distance = "20 км",
+            id = "123",
+            onNavigateToStatement = {}
         )
         StatementShortCard(
             modifier = Modifier
@@ -117,7 +124,9 @@ private fun CardPreview() {
             roadName = "Московское шоссе",
             category = "Автомобильная дорога",
             date = "12.12.2021",
-            distance = "20 км"
+            distance = "20 км",
+            id = "123",
+            onNavigateToStatement = {}
         )
         StatementShortCard(
             modifier = Modifier
@@ -126,7 +135,9 @@ private fun CardPreview() {
             roadName = "Московское шоссе",
             category = "Автомобильная дорога",
             date = "12.12.2021",
-            distance = "20 км"
+            distance = "20 км",
+            id = "123",
+            onNavigateToStatement = {}
         )
     }
 }

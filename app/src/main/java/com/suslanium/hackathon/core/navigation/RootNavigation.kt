@@ -15,15 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.suslanium.hackathon.auth.presentation.AuthScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
+import com.suslanium.hackathon.statements.presentation.screen.StatementScreen
 
 object RoadCareDestinations {
     // Root
     const val ONBOARDING = "onboarding"
     const val AUTH = "auth"
+    const val STATEMENT = "statement"
 
     // Bottom navigation
     const val STATEMENTS = "statements"
@@ -62,6 +66,23 @@ fun RootNavigation(
             BottomNavigationWrapper(
                 rootNavController = navController,
                 onCloseApp = onCloseApp
+            )
+        }
+        composable(
+            route = "${RoadCareDestinations.STATEMENT}/{statementId}",
+            arguments = listOf(
+                navArgument("statementId") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
+
+            StatementScreen(
+                statementId = statementId,
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }

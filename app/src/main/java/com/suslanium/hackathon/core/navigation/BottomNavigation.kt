@@ -19,7 +19,11 @@ fun BottomNavigation(
         startDestination = RoadCareDestinations.STATEMENTS
     ) {
         composable(RoadCareDestinations.STATEMENTS) {
-            StatementsScreen()
+            StatementsScreen(
+                onNavigateToStatement = {
+                    rootNavController.navigate("${RoadCareDestinations.STATEMENT}/$it")
+                }
+            )
         }
         composable(RoadCareDestinations.MAP) {
             PlaceholderScreen(

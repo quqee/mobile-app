@@ -31,6 +31,7 @@ import com.suslanium.hackathon.statements.data.model.StatementResponseDto
 @Composable
 fun StatementsContent(
     statements: List<StatementResponseDto>,
+    onNavigateToStatement: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -54,10 +55,12 @@ fun StatementsContent(
 
             items(statements) { statement ->
                 StatementShortCard(
+                    id = statement.statementId,
                     roadName = statement.roadType.description,
                     category = statement.roadType.description,
                     date = statement.createTime.localDateTimeToDate(),
-                    distance = statement.length.toString()
+                    distance = statement.length.toString(),
+                    onNavigateToStatement = onNavigateToStatement
                 )
             }
         }

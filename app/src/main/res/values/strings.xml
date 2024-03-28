@@ -32,4 +32,10 @@
 
     // Statements
     <string name="createStatement">Создать ведомость</string>
+    <string name="statement">Ведомость</string>
+
+    // Defects
+    <string name="defects">Дефекты</string>
+    <string name="defect">Дефект</string>
+    <string name="order">Поручение</string>
 </resources>

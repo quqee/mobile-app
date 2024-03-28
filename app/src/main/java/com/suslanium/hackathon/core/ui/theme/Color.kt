@@ -12,3 +12,9 @@ val Green = Color(0xFF00C48C)
 val Yellow = Color(0xFFE6C100)
 val ErrorContainer = Color(0xFFFDEDED)
 val TextFieldOutline = Color(0xFF5E5E5E)
+
+// Statuses
+val RejectedStatusColor = Color(0xFFFF647C)
+val WaitingStatusColor = Color(0xFF0084F4)
+val InProgressStatusColor = Color(0xFFFFCF5C)
+val CompletedStatusColor = Color(0xFF00C48C)
