@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.theme
+package com.suslanium.hackathon.core.ui.theme
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme

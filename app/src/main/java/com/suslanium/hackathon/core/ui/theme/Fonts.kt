@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.theme
+package com.suslanium.hackathon.core.ui.theme
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.common
+package com.suslanium.hackathon.core.ui.common
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,12 +17,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.ui.theme.DarkBlue
-import com.suslanium.hackathon.ui.theme.Error
-import com.suslanium.hackathon.ui.theme.ErrorContainer
-import com.suslanium.hackathon.ui.theme.LightGray
-import com.suslanium.hackathon.ui.theme.S15_W400
-import com.suslanium.hackathon.ui.theme.TextFieldOutline
+import com.suslanium.hackathon.core.ui.theme.DarkBlue
+import com.suslanium.hackathon.core.ui.theme.Error
+import com.suslanium.hackathon.core.ui.theme.ErrorContainer
+import com.suslanium.hackathon.core.ui.theme.LightGray
+import com.suslanium.hackathon.core.ui.theme.S15_W400
+import com.suslanium.hackathon.core.ui.theme.TextFieldOutline
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

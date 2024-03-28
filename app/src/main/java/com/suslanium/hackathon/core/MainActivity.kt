@@ -1,4 +1,4 @@
-package com.suslanium.hackathon
+package com.suslanium.hackathon.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.suslanium.hackathon.ui.theme.HackathonTheme
+import com.suslanium.hackathon.core.ui.theme.HackathonTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

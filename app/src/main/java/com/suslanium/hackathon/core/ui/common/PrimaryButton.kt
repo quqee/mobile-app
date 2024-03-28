@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.ui.common
+package com.suslanium.hackathon.core.ui.common
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.ui.theme.Primary
-import com.suslanium.hackathon.ui.theme.PrimaryDisabled
-import com.suslanium.hackathon.ui.theme.S15_W600
+import com.suslanium.hackathon.core.ui.theme.Primary
+import com.suslanium.hackathon.core.ui.theme.PrimaryDisabled
+import com.suslanium.hackathon.core.ui.theme.S15_W600
 
 @Composable
 fun PrimaryButton(
