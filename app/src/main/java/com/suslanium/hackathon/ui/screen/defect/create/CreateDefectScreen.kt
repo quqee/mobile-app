@@ -1,5 +1,6 @@
 package com.suslanium.hackathon.ui.screen.defect.create
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -16,8 +17,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -39,6 +43,12 @@ import com.suslanium.hackathon.ui.theme.S20_W700
 fun CreateDefectScreen() {
     val context = LocalContext.current
     val imageUris = remember { mutableStateListOf<Uri>() }
+    var latitude by remember {
+        mutableStateOf<Double?>(null)
+    }
+    var longitude by remember {
+        mutableStateOf<Double?>(null)
+    }
     val replaceLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents(),
         onResult = { uri: List<Uri> ->
@@ -50,6 +60,12 @@ fun CreateDefectScreen() {
         onResult = { uri: List<Uri> ->
             imageUris.addAll(uri)
         })
+    val coordinatesLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode != RESULT_OK) return@rememberLauncherForActivityResult
+            latitude = result.data?.extras?.getDouble(MapSelectionActivity.LATITUDE)
+            longitude = result.data?.extras?.getDouble(MapSelectionActivity.LONGITUDE)
+        }
 
     Column(modifier = Modifier.padding(all = 16.dp)) {
         IconButton(modifier = Modifier
@@ -82,11 +98,11 @@ fun CreateDefectScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         AppOutlinedTextField(modifier = Modifier.pointerInput(Unit) {
             detectTapGestures {
-                context.startActivity(Intent(context, MapSelectionActivity::class.java))
+                coordinatesLauncher.launch(Intent(context, MapSelectionActivity::class.java))
             }
         },
             enabled = false,
-            value = "",
+            value = if (latitude != null && longitude != null) "$latitude $longitude" else "",
             onValueChange = {},
             label = stringResource(id = R.string.coordinates),
             trailingIcon = {
