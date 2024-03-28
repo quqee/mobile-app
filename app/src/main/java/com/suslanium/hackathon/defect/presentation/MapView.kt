@@ -26,8 +26,8 @@ fun MapView(
         return@AndroidView mapView
     }, update = {
         when (lifeCycleState) {
-            Lifecycle.Event.ON_START -> it.onStart()
-            Lifecycle.Event.ON_STOP -> it.onStop()
+            Lifecycle.Event.ON_RESUME -> it.onStart()
+            Lifecycle.Event.ON_PAUSE -> it.onStop()
             else -> Unit
         }
     })

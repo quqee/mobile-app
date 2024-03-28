@@ -43,7 +43,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Lifecycle
 import coil.compose.rememberAsyncImagePainter
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.core.ui.common.Status
@@ -70,8 +70,8 @@ val searchManager = SearchFactory.getInstance().createSearchManager(SearchManage
 fun DefectScreen(
     model: DefectModel,
     onEditClick: () -> Unit = {},
-    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
 ) {
+    val lifeCycleState by LocalLifecycleOwner.current.lifecycle.observeAsState()
     val context = LocalContext.current
     val state = rememberPagerState(pageCount = { model.picturesBeforeRepair.size })
     var addressValue by remember {
@@ -92,10 +92,14 @@ fun DefectScreen(
             addressValue = context.getString(R.string.error_address)
         }
     }
-    LaunchedEffect(lifecycleOwner) {
-        searchManager.submit(
-            Point(model.latitude, model.longitude), 17, SearchOptions(), searchSessionListener
-        )
+    LaunchedEffect(lifeCycleState) {
+        when (lifeCycleState) {
+            Lifecycle.Event.ON_RESUME -> searchManager.submit(
+                Point(model.latitude, model.longitude), 17, SearchOptions(), searchSessionListener
+            )
+
+            else -> Unit
+        }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -160,8 +164,9 @@ fun DefectScreen(
             ) {
                 Icon(Icons.Outlined.LocationOn, contentDescription = null, tint = DarkBlue)
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "$addressValue (${model.latitude}-${model.longitude})",
-                    color = DarkBlue)
+                Text(
+                    text = "$addressValue (${model.latitude}-${model.longitude})", color = DarkBlue
+                )
             }
 
             if (model.defectDistance != null) {
@@ -172,8 +177,11 @@ fun DefectScreen(
                 ) {
                     Icon(Icons.Outlined.ViewInAr, contentDescription = null, tint = DarkBlue)
                     Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = stringResource(id = R.string.square_meters, model.defectDistance.toString()),
-                        color = DarkBlue)
+                    Text(
+                        text = stringResource(
+                            id = R.string.square_meters, model.defectDistance.toString()
+                        ), color = DarkBlue
+                    )
                 }
             }
 
@@ -227,7 +235,11 @@ fun DefectScreen(
                                 .clip(shape = RoundedCornerShape(16.dp))
                                 .background(VeryLightGray)
                         )
-                        if (it != model.picturesAfterRepair.size-1) Spacer(modifier = Modifier.width(10.dp))
+                        if (it != model.picturesAfterRepair.size - 1) Spacer(
+                            modifier = Modifier.width(
+                                10.dp
+                            )
+                        )
                     }
                 }
             }
