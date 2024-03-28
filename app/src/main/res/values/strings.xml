@@ -9,4 +9,14 @@
     <string name="statements">Statements</string>
     <string name="map">Map</string>
     <string name="profile">Profile</string>
+
+    // Top bar
+    <string name="goBack">Go back</string>
+
+    // Auth
+    <string name="logInAuth">Вход</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="changePasswordVisibility">Изменить видимость пароля</string>
+    <string name="authError">Ошибка авторизации</string>
 </resources>

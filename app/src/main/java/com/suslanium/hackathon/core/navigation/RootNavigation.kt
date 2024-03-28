@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.suslanium.hackathon.auth.presentation.AuthScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
 
 object RoadCareDestinations {
@@ -47,12 +48,13 @@ fun RootNavigation(
             )
         }
         composable(RoadCareDestinations.AUTH) {
-            PlaceholderScreen(
-                text = "auth",
-                onButtonClick = {
-                    navController.navigate(RoadCareDestinations.STATEMENTS)
+            AuthScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
                 },
-                buttonText = "to bottom nav"
+                onNavigateToStatements = {
+                    navController.navigate(RoadCareDestinations.STATEMENTS)
+                }
             )
         }
         composable(RoadCareDestinations.STATEMENTS) {
