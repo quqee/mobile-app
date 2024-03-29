@@ -1,5 +1,6 @@
 package com.suslanium.hackathon.core.ui.common.dialogs
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,8 +21,10 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,11 +41,12 @@ import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S14_W400
 import com.suslanium.hackathon.core.ui.theme.S15_W600
 import com.suslanium.hackathon.core.ui.theme.S20_W700
+import com.suslanium.hackathon.core.ui.theme.VeryLightGray
 import java.util.UUID
 
 @Composable
 fun SelectEmailDialog(
-    onConfirmClick: (selectedUser: User?) -> Unit,
+    onConfirmClick: () -> Unit,
     onCancelClick: () -> Unit,
     searchText: MutableState<String>,
     users: List<User>,
@@ -78,6 +82,10 @@ fun SelectEmailDialog(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
+                var confirm by remember {
+                    mutableStateOf("")
+                }
+
                 LazyColumn(Modifier.height(420.dp)) {
                     if (filteredUsers.isEmpty()) {
                         item {
@@ -88,13 +96,28 @@ fun SelectEmailDialog(
                         }
                     } else {
                         items(filteredUsers.size) {
-                            Box(modifier = Modifier.clickable {
-                                selectedUser.value =
-                                    if (selectedUser.value?.id == filteredUsers[it].id) null else filteredUsers[it]
-                            }) {
+                            Box(
+                                modifier = Modifier
+                                    .clickable {
+                                        if (selectedUser.value?.id == filteredUsers[it].id){
+                                            selectedUser.value = null
+                                            confirm = ""
+                                        } else {
+                                            selectedUser.value = filteredUsers[it]
+                                            confirm = filteredUsers[it].email
+                                        }
+                                    }
+                            ) {
                                 ShortCard(
                                     title = filteredUsers[it].organizationName,
-                                    desc = filteredUsers[it].email
+                                    desc = filteredUsers[it].email,
+                                    containerColor =
+                                        if (confirm == filteredUsers[it].email){
+                                            VeryLightGray
+                                        }
+                                        else{
+                                            Color.White
+                                        }
                                 )
                             }
                             Spacer(modifier = Modifier.height(8.dp))
@@ -102,27 +125,10 @@ fun SelectEmailDialog(
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    PrimaryButton(text = "Подтвердить")
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Button(
-                        onClick = { onConfirmClick(selectedUser.value) },
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = LightGray.copy(alpha = 0.1f), contentColor = Primary
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(42.dp)
-                    ) {
-                        Text(
-                            text = "Отмена", style = S15_W600
-                        )
-                    }
-                }
+                PrimaryButton(
+                    text = "Подтвердить",
+                    onClick = onConfirmClick
+                )
             }
         }
     }

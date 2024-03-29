@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.security.crypto)
     implementation(libs.logging.interceptor)
+    implementation(libs.androidx.navigation.runtime.ktx)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
 

@@ -37,7 +37,7 @@ fun StatementFullCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
         ), colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
+            containerColor = Color.White
         ), modifier = modifier
     ) {
         Column(

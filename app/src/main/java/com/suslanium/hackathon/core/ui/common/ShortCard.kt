@@ -20,13 +20,17 @@ import com.suslanium.hackathon.core.ui.theme.S16_W700
 
 @Composable
 fun ShortCard(
-    modifier: Modifier = Modifier, status: Status? = null, title: String, desc: String
+    modifier: Modifier = Modifier,
+    status: Status? = null,
+    title: String,
+    desc: String,
+    containerColor: Color = Color.White
 ) {
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
         ), colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
+            containerColor = containerColor
         ), modifier = modifier
     ) {
         Column(
@@ -49,15 +53,4 @@ fun ShortCard(
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun DefectShortCardPreview() {
-    ShortCard(
-        modifier = Modifier,
-        status = Status.DONE,
-        title = "Комната 101",
-        desc = "Корпус 1"
-    )
 }
