@@ -64,7 +64,7 @@ fun StatementsContent(
             items(statements) { statement ->
                 StatementShortCard(
                     id = statement.statementId,
-                    roadName = statement.roadType.description,
+                    roadName = statement.areaName,
                     category = statement.roadType.description,
                     date = statement.createTime.localDateTimeToDate(),
                     distance = statement.length.toString(),
