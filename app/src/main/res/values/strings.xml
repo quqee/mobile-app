@@ -1,3 +1,85 @@
 <resources>
-    <string name="app_name">Hackathon</string>
+    <string name="new_defect">Новый дефект</string>
+    <string name="defect_type">Тип дефекта</string>
+    <string name="coordinates">Координаты</string>
+    <string name="volume">Объём (кв.м)</string>
+    <string name="upload_photo">Загрузить фотографии</string>
+    <string name="add_photo">Добавить фотографии</string>
+    <string name="create">Создать</string>
+    <string name="choose_defect_type">Выберите тип дефекта</string>
+    <string name="generic_error_msg">Что-то пошло не так, проверьте подключение к интернету или попробуйте повторить попытку позже.</string>
+    <string name="retry">Попробовать снова</string>
+    <string name="appName">RoadCare</string>
+
+    // Onboarding
+    <string name="startDescription">Откажитесь от тонны письменной работы и автоматизируйте исправление дорожных дефектов в несколько кликов.</string>
+    <string name="logIn">Войти</string>
+
+    // Bottom navigation
+    <string name="statements">Statements</string>
+    <string name="map">Map</string>
+    <string name="profile">Profile</string>
+
+    // Top bar
+    <string name="goBack">Go back</string>
+
+    // Auth
+    <string name="logInAuth">Вход</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="changePasswordVisibility">Изменить видимость пароля</string>
+    <string name="authError">Ошибка авторизации</string>
+
+    <string name="creation_date">Дата создания:</string>
+    <string name="road_length">Протяженность:</string>
+    <string name="road_type">Тип дороги:</string>
+    <string name="road_direction">Направление:</string>
+    <string name="fixed">ИСПРАВЛЕН</string>
+    <string name="opened">ОТКРЫТ</string>
+    <string name="in_progress">В РАБОТЕ</string>
+    <string name="waiting">В ОЖИДАНИИ</string>
+    <string name="cancelled">ОТМЕНЕН</string>
+    <string name="assignment">Новое поручение</string>
+    <string name="assignment_on">Поручение на ведомость</string>
+    <string name="record_info">Сообщите информацию о поручении с помощью голоса, а мы расшифруем её</string>
+    <string name="record">Записать</string>
+    <string name="stop">Остановить</string>
+    <string name="recording">Идёт запись</string>
+    <string name="your_ass">Ваше поручение</string>
+    <string name="not_found">Сотрудник не найден</string>
+
+    // Statements
+    <string name="createStatement">Создать ведомость</string>
+    <string name="statement">Ведомость</string>
+    <string name="statementsRu">Ведомости</string>
+    <string name="newStatement">Новая ведомость</string>
+    <string name="roadName">Наименование дороги/участка</string>
+    <string name="roadLength">Протяженность (м)</string>
+    <string name="roadType">Категория дороги</string>
+    <string name="roadSurface">Тип покрытия</string>
+    <string name="direction">Направление</string>
+    <string name="chooseRoadType">Выберите тип дороги</string>
+    <string name="chooseSurfaceType">Выберите тип дорожного покрытия</string>
+    <string name="statementCreationError">Ошибка при создании ведомости</string>
+
+    // Defects
+    <string name="defects">Дефекты</string>
+    <string name="defect">Дефект</string>
+    <string name="order">Поручение</string>
+
+    <string name="loading">Загрузка</string>
+    <string name="error_address">Не удалось загрузить адрес</string>
+    <string name="work_result">Результаты работы</string>
+    <string name="square_meters">%1$s м\u00B2</string>
+    <string name="mark_as_done">Отметить как выполненное</string>
+    <string name="select_action">Что Вы хотите сделать?</string>
+    <string name="intro_1_title">Добро пожаловать в RoadCare!</string>
+    <string name="intro_1_desc">Ваш помощник в управлении состоянием дорожного покрытия. Вы сможете сократить время на фиксацию дефектов и оперативно реагировать на возникающие проблемы</string>
+    <string name="intro_2_title">Оптимизация процессов</string>
+    <string name="intro_2_desc">Забудьте о неудобных бумажных отчетах и долгих процессах передачи информации! С нами вы сможете более эффективно управлять процессом обслуживания дорог</string>
+    <string name="intro_3_title">Эффективное управление задачами!</string>
+    <string name="intro_3_desc">Наше приложение позволяет вам легко и быстро назначать задачи исполнителям работ. Теперь процесс управления дефектами стал еще более прозрачным и эффективным</string>
+    <string name="skip">Пропустить</string>
+    <string name="next">Далее</string>
+    <string name="lets_start">Начать</string>
 </resources>

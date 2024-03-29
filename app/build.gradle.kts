@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -6,6 +8,12 @@ plugins {
 android {
     namespace = "com.suslanium.hackathon"
     compileSdk = 34
+    val mapKitApiKey: String = gradleLocalProperties(rootDir, providers).getProperty("MAPKIT_API_KEY") ?: ""
+
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.suslanium.hackathon"
@@ -18,6 +26,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "MAPKIT_API_KEY", "\"${mapKitApiKey}\"")
     }
 
     buildTypes {
@@ -40,7 +50,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -59,6 +69,25 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.navigation.runtime.ktx)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
+
+    implementation(libs.coil.compose)
+    implementation(libs.maps.mobile)
 }
