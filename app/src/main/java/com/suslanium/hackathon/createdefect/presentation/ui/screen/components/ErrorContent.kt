@@ -23,9 +23,11 @@ import com.suslanium.hackathon.core.ui.theme.S15_W400
 
 @Composable
 fun ErrorContent(onRetry: () -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Spacer(modifier = Modifier.weight(1f))
         Column(
             modifier = Modifier
