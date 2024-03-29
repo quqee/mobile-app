@@ -32,4 +32,8 @@ class AuthRepository(
         authApiService.logout(RefreshRequest(refreshToken ?: ERROR_STRING))
         tokenDataSource.removeTokens()
     }
+
+    fun hasToken(): Boolean {
+        return tokenDataSource.fetchToken(TokenType.ACCESS) != null
+    }
 }

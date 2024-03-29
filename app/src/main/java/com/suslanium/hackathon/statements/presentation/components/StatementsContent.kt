@@ -35,6 +35,7 @@ import com.suslanium.hackathon.statements.data.model.StatementResponseDto
 fun StatementsContent(
     statements: List<StatementResponseDto>,
     onNavigateToStatement: (String) -> Unit,
+    onNavigateToCreateStatement: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -79,9 +80,7 @@ fun StatementsContent(
                     bottom = PaddingMedium,
                     end = PaddingRegular
                 ),
-            onClick = {
-                // TODO navigate to add statement
-            },
+            onClick = onNavigateToCreateStatement,
             containerColor = Primary,
             contentColor = Color.White
         ) {

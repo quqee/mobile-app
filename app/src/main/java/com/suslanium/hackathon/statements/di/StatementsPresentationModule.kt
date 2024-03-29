@@ -1,5 +1,6 @@
 package com.suslanium.hackathon.statements.di
 
+import com.suslanium.hackathon.statements.presentation.viewmodel.CreateStatementViewModel
 import com.suslanium.hackathon.statements.presentation.viewmodel.StatementViewModel
 import com.suslanium.hackathon.statements.presentation.viewmodel.StatementsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,5 +17,7 @@ fun provideStatementsPresentationModule(): Module = module {
             get(), get()
         )
     }
+
+    viewModel { CreateStatementViewModel(get(), get()) }
 
 }

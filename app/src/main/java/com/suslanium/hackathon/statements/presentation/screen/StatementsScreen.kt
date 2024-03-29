@@ -14,6 +14,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun StatementsScreen(
     onNavigateToStatement: (String) -> Unit,
+    onNavigateToCreateStatement: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: StatementsViewModel = koinViewModel()
 ) {
@@ -28,7 +29,8 @@ fun StatementsScreen(
             StatementsContent(
                 modifier = modifier,
                 statements = statements,
-                onNavigateToStatement = onNavigateToStatement
+                onNavigateToStatement = onNavigateToStatement,
+                onNavigateToCreateStatement = onNavigateToCreateStatement
             )
         }
     }
