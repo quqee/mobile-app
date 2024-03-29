@@ -2,6 +2,7 @@ package com.suslanium.hackathon.core
 
 import android.app.Application
 import com.suslanium.hackathon.BuildConfig
+import com.suslanium.hackathon.assignment.di.assignmentProvidePresentationModule
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
@@ -47,7 +48,8 @@ class RoadCareApplication : Application() {
                 provideCreateDefectDataModule(),
                 provideCreateDefectPresentationModule(),
 
-                provideSplashPresentationModule()
+                provideSplashPresentationModule(),
+                assignmentProvidePresentationModule()
             )
         }
     }

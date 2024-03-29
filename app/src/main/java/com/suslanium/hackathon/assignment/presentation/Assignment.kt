@@ -10,10 +10,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -24,9 +22,7 @@ import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Create
-import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -67,7 +63,8 @@ import java.util.UUID
 
 @Composable
 fun Assignment(
-    statementId: UUID
+    statementId: UUID,
+    onConfirm: () -> Unit
 ){
     val context = LocalContext.current
     var file: File
@@ -80,11 +77,12 @@ fun Assignment(
     val model: AssignmentViewModel = koinViewModel()
     model.cacheDir = context.cacheDir
 
-    val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId) })
+    val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId.toString()) })
     val uiState by viewModel.statementUiState.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
+            .background(Color.White)
             .padding(
                 horizontal = 16.dp,
             )
@@ -421,7 +419,7 @@ fun Assignment(
         PrimaryButton(
             text = "Создать",
             onClick = {
-
+                onConfirm()
             }
         )
     }

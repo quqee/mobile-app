@@ -47,13 +47,15 @@ fun StatementScreen(
     onNavigateBack: () -> Unit,
     onNavigateToCreateDefect: (String) -> Unit,
     onNavigateToDefect: (String) -> Unit,
-    // TODO onNavigateToCreateOrder
+    onNavigateToAssignment: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId) })
     val uiState by viewModel.statementUiState.collectAsStateWithLifecycle()
 
-    Scaffold(modifier = Modifier.fillMaxSize().background(Color.White), topBar = {
+    Scaffold(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White), topBar = {
         RoadCareTopBar(
             text = stringResource(id = R.string.statement), onBackButtonClick = onNavigateBack
         )
@@ -81,7 +83,7 @@ fun StatementScreen(
                         text = stringResource(id = R.string.order), style = S15_W600
                     )
                 }, onClick = {
-                    // TODO navigate to add an order
+                    onNavigateToAssignment()
                 }, icon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_plus),
@@ -103,7 +105,8 @@ fun StatementScreen(
                         .padding(it)
                         .padding(horizontal = PaddingMedium)
                         .fillMaxSize()
-                        .background(Color.White), verticalArrangement = Arrangement.spacedBy(20.dp)
+                        .background(Color.White),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     StatementFullCard(
                         roadName = statement.areaName,

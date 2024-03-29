@@ -79,7 +79,7 @@ fun StatementShortCard(
                     modifier = Modifier.size(16.dp)
                 )
                 Text(
-                    text = "до $date",
+                    text = "$date",
                     style = S14_W400,
                     color = BlueGray,
                     modifier = Modifier.padding(start = 8.dp)
