@@ -21,6 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.suslanium.hackathon.auth.presentation.AuthScreen
 import com.suslanium.hackathon.createdefect.presentation.ui.screen.CreateDefectScreen
+import com.suslanium.hackathon.defect.presentation.ui.AddReviewScreen
 import com.suslanium.hackathon.defect.presentation.ui.DefectScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
 import com.suslanium.hackathon.statements.presentation.screen.StatementScreen
@@ -31,6 +32,7 @@ object RoadCareDestinations {
     const val AUTH = "auth"
     const val CREATE_DEFECT = "create_defect"
     const val DEFECT = "defect"
+    const val ADD_REVIEW = "add_review"
     const val STATEMENT = "statement"
 
     // Bottom navigation
@@ -41,100 +43,90 @@ object RoadCareDestinations {
 
 @Composable
 fun RootNavigation(
-    navController: NavHostController,
-    onCloseApp: () -> Unit
+    navController: NavHostController, onCloseApp: () -> Unit
 ) {
     NavHost(
-        navController = navController,
-        startDestination = RoadCareDestinations.ONBOARDING
+        navController = navController, startDestination = RoadCareDestinations.ONBOARDING
     ) {
         composable(RoadCareDestinations.ONBOARDING) {
-            OnboardingScreen(
-                onNavigateToAuth = {
-                    navController.navigate(RoadCareDestinations.AUTH)
-                }
-            )
+            OnboardingScreen(onNavigateToAuth = {
+                navController.navigate(RoadCareDestinations.AUTH)
+            })
         }
         composable(RoadCareDestinations.AUTH) {
-            AuthScreen(
-                onNavigateBack = {
-                    navController.popBackStack()
-                },
-                onNavigateToStatements = {
-                    navController.navigate(RoadCareDestinations.STATEMENTS)
-                }
-            )
+            AuthScreen(onNavigateBack = {
+                navController.popBackStack()
+            }, onNavigateToStatements = {
+                navController.navigate(RoadCareDestinations.STATEMENTS)
+            })
         }
         composable(RoadCareDestinations.STATEMENTS) {
             // Navigate to this route to enter bottom navigation container
             BottomNavigationWrapper(
-                rootNavController = navController,
-                onCloseApp = onCloseApp
+                rootNavController = navController, onCloseApp = onCloseApp
             )
         }
         composable(
             route = "${RoadCareDestinations.CREATE_DEFECT}/{statementId}",
-            arguments = listOf(
-                navArgument("statementId") {
-                    type = NavType.StringType
-                }
-            )
+            arguments = listOf(navArgument("statementId") {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
             val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
 
-            CreateDefectScreen(
-                statementId = statementId,
-                onNavigateAfterSuccess = {
-                    navController.popBackStack()
-                },
-                onNavigateBack = {
-                    navController.popBackStack()
-                }
-            )
+            CreateDefectScreen(statementId = statementId, onNavigateAfterSuccess = {
+                navController.popBackStack()
+            }, onNavigateBack = {
+                navController.popBackStack()
+            })
         }
         composable(
             route = "${RoadCareDestinations.STATEMENT}/{statementId}",
-            arguments = listOf(
-                navArgument("statementId") {
-                    type = NavType.StringType
-                }
-            )
+            arguments = listOf(navArgument("statementId") {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
             val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
 
-            StatementScreen(
-                statementId = statementId,
-                onNavigateBack = {
-                    navController.popBackStack()
-                },
-                onNavigateToCreateDefect = {
-                    navController.navigate("${RoadCareDestinations.CREATE_DEFECT}/$it")
-                },
-                onNavigateToDefect = {
-                    navController.navigate("${RoadCareDestinations.DEFECT}/$it")
-                }
-            )
+            StatementScreen(statementId = statementId, onNavigateBack = {
+                navController.popBackStack()
+            }, onNavigateToCreateDefect = {
+                navController.navigate("${RoadCareDestinations.CREATE_DEFECT}/$it")
+            }, onNavigateToDefect = {
+                navController.navigate("${RoadCareDestinations.DEFECT}/$it")
+            })
         }
         composable(
             route = "${RoadCareDestinations.DEFECT}/{defectId}",
-            arguments = listOf(
-                navArgument("defectId") {
-                    type = NavType.StringType
-                }
-            )
+            arguments = listOf(navArgument("defectId") {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
             val defectId = backStackEntry.arguments?.getString("defectId") ?: ""
 
-            DefectScreen(defectId = defectId, onCloseScreen = navController::popBackStack)
+            DefectScreen(defectId = defectId, onNavigateToAddReview = {
+                navController.navigate("${RoadCareDestinations.ADD_REVIEW}/$defectId")
+            })
+        }
+        composable(route = "${RoadCareDestinations.ADD_REVIEW}/{defectId}", arguments = listOf(
+            navArgument("defectId") {
+                type = NavType.StringType
+            }
+        )) { backStackEntry ->
+            val defectId = backStackEntry.arguments?.getString("defectId") ?: ""
+
+            AddReviewScreen(defectId = defectId, onBack = navController::popBackStack, onNavigateAfterSuccess = {
+                navController.popBackStack()
+                navController.popBackStack()
+                navController.navigate("${RoadCareDestinations.DEFECT}/$defectId")
+            })
         }
     }
 }
 
 @Composable
 fun PlaceholderScreen(
-    text: String,
-    onButtonClick: () -> Unit,
-    buttonText: String
+    text: String, onButtonClick: () -> Unit, buttonText: String
 ) {
     Box(
         modifier = Modifier

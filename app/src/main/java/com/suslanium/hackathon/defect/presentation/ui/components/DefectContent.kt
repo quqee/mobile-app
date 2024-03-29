@@ -104,7 +104,10 @@ fun DefectContent(
     var shouldShowActionDialog by remember { mutableStateOf(false) }
 
     if (shouldShowActionDialog) {
-        DefectActionDialog(onMarkAsDone = onMarkAsDone, onCancelClick = {
+        DefectActionDialog(onMarkAsDone = {
+            shouldShowActionDialog = false
+            onMarkAsDone()
+        }, onCancelClick = {
             shouldShowActionDialog = false
         })
     }

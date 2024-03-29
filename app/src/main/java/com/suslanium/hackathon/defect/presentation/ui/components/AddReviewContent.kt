@@ -75,7 +75,7 @@ fun AddReviewContent(
                 editableDefectImageList(imageUris, addLauncher)
             }
 
-            PrimaryButton(text = stringResource(id = R.string.mark_as_done), onClick = { })
+            PrimaryButton(text = stringResource(id = R.string.mark_as_done), onClick = onUploadClick)
         }
     }
 }
