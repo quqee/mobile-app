@@ -1,8 +1,10 @@
 package com.suslanium.hackathon.core.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,11 +23,13 @@ fun BottomNavigation(
     // Use rootNavController to navigate to routes from RootNavigation
 
     NavHost(
+        modifier = Modifier.background(Color.White),
         navController = bottomNavController,
         startDestination = RoadCareDestinations.STATEMENTS
     ) {
         composable(RoadCareDestinations.STATEMENTS) {
             StatementsScreen(
+                modifier = Modifier.background(Color.White),
                 onNavigateToStatement = {
                     rootNavController.navigate("${RoadCareDestinations.STATEMENT}/$it")
                 },

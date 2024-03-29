@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -52,13 +53,13 @@ fun StatementScreen(
     val viewModel: StatementViewModel = koinViewModel(parameters = { parametersOf(statementId) })
     val uiState by viewModel.statementUiState.collectAsStateWithLifecycle()
 
-    Scaffold(topBar = {
+    Scaffold(modifier = Modifier.fillMaxSize().background(Color.White), topBar = {
         RoadCareTopBar(
             text = stringResource(id = R.string.statement), onBackButtonClick = onNavigateBack
         )
     }, floatingActionButton = {
         if (uiState is StatementUiState.Success) {
-            Column {
+            Column(modifier = Modifier.background(Color.White)) {
                 ExtendedFloatingActionButton(text = {
                     Text(
                         text = stringResource(id = R.string.defect), style = S15_W600
@@ -101,6 +102,7 @@ fun StatementScreen(
                     modifier = modifier
                         .padding(it)
                         .padding(horizontal = PaddingMedium)
+                        .fillMaxSize()
                         .background(Color.White), verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     StatementFullCard(

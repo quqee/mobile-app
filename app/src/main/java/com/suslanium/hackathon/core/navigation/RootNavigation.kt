@@ -97,7 +97,7 @@ fun RootNavigation(
         ) { backStackEntry ->
             val statementId = backStackEntry.arguments?.getString("statementId") ?: ""
 
-            StatementScreen(statementId = statementId, onNavigateBack = {
+            StatementScreen(modifier = Modifier.background(Color.White), statementId = statementId, onNavigateBack = {
                 navController.popBackStack()
             }, onNavigateToCreateDefect = {
                 navController.navigate("${RoadCareDestinations.CREATE_DEFECT}/$it")
