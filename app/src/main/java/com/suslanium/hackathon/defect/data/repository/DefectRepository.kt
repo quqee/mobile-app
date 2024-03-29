@@ -15,7 +15,7 @@ class DefectRepository {
             longitude = 35.7913066667,
             defectType = "Поперечная трещина",
             defectDistance = 35.0,
-            status = DefectStatus.COMPLETED,
+            status = DefectStatus.IN_PROCESS,
             picturesAfterRepair = listOf(
                 "https://images-cdn.cian.site/realty/articles/content/30767/doroga1lrg.jpg",
                 "https://upload.wikimedia.org/wikipedia/commons/4/44/Aminyevskoye_Highway_16.08.2013.jpg",

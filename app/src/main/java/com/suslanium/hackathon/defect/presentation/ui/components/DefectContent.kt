@@ -69,7 +69,7 @@ val searchManager = SearchFactory.getInstance().createSearchManager(SearchManage
 @Composable
 fun DefectContent(
     model: DefectModel,
-    onEditClick: () -> Unit = {},
+    onMarkAsDone: () -> Unit = {}
 ) {
     val lifeCycleState by LocalLifecycleOwner.current.lifecycle.observeAsState()
     val context = LocalContext.current
@@ -100,6 +100,13 @@ fun DefectContent(
 
             else -> Unit
         }
+    }
+    var shouldShowActionDialog by remember { mutableStateOf(false) }
+
+    if (shouldShowActionDialog) {
+        DefectActionDialog(onMarkAsDone = onMarkAsDone, onCancelClick = {
+            shouldShowActionDialog = false
+        })
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -246,15 +253,19 @@ fun DefectContent(
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        FloatingActionButton(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(all = 16.dp),
-            contentColor = White,
-            containerColor = Primary,
-            onClick = onEditClick,
-        ) {
-            Icon(Icons.Filled.Edit, null)
+        if (model.status.statusAlternative != Status.DONE) {
+            FloatingActionButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(all = 16.dp),
+                contentColor = White,
+                containerColor = Primary,
+                onClick = {
+                    shouldShowActionDialog = true
+                },
+            ) {
+                Icon(Icons.Filled.Edit, null)
+            }
         }
     }
 }
