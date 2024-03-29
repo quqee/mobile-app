@@ -39,6 +39,13 @@
     <string name="in_progress">В РАБОТЕ</string>
     <string name="waiting">В ОЖИДАНИИ</string>
     <string name="cancelled">ОТМЕНЕН</string>
+    <string name="assignment">Новое поручение</string>
+    <string name="assignment_on">Поручение на ведомость</string>
+    <string name="record_info">Сообщите информацию о поручении с помощью голоса, а мы расшифруем её</string>
+    <string name="record">Записать</string>
+    <string name="stop">Остановить</string>
+    <string name="recording">Идёт запись</string>
+    <string name="your_ass">Ваше поручение</string>
     <string name="not_found">Сотрудник не найден</string>
 
     // Statements
