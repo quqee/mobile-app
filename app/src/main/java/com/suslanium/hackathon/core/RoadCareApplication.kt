@@ -5,9 +5,14 @@ import com.suslanium.hackathon.BuildConfig
 import com.suslanium.hackathon.auth.di.provideAuthDataModule
 import com.suslanium.hackathon.auth.di.provideAuthPresentationModule
 import com.suslanium.hackathon.core.di.provideCoreDataModule
+import com.suslanium.hackathon.createdefect.di.provideCreateDefectDataModule
 import com.suslanium.hackathon.createdefect.di.provideCreateDefectPresentationModule
+import com.suslanium.hackathon.defect.di.defectProvidePresentationModule
+import com.suslanium.hackathon.defect.di.provideDefectDataModule
 import com.suslanium.hackathon.di.providePresentationModule
-import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
+import com.suslanium.hackathon.profile.di.provideProfileDataModule
+import com.suslanium.hackathon.profile.di.provideProfilePresentationModule
+import com.suslanium.hackathon.splash.di.provideSplashPresentationModule
 import com.suslanium.hackathon.statements.di.provideStatementsDataModule
 import com.suslanium.hackathon.statements.di.provideStatementsPresentationModule
 import com.yandex.mapkit.MapKitFactory
@@ -32,9 +37,17 @@ class RoadCareApplication : Application() {
                 provideStatementsDataModule(),
                 provideStatementsPresentationModule(),
 
-                profileProvidePresentationModule(),
+                provideProfileDataModule(),
+                provideProfilePresentationModule(),
 
-                provideCreateDefectPresentationModule()
+                provideCreateDefectPresentationModule(),
+
+                provideDefectDataModule(),
+                defectProvidePresentationModule(),
+                provideCreateDefectDataModule(),
+                provideCreateDefectPresentationModule(),
+
+                provideSplashPresentationModule()
             )
         }
     }

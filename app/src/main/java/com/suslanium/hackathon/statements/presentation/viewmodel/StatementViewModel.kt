@@ -53,7 +53,11 @@ class StatementViewModel(
     }
 
     fun onRetry() {
-        // TODO
+        _statementUiState.update { StatementUiState.Loading }
+        viewModelScope.launch(Dispatchers.IO + statementExceptionHandler) {
+            val statement = statementRepository.getStatementInfo(statementId)
+            _statementUiState.update { StatementUiState.Success(statement) }
+        }
     }
 
 }

@@ -36,9 +36,11 @@ fun StatementFullCard(
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
-        ), colors = CardDefaults.cardColors(
+        ),
+        colors = CardDefaults.cardColors(
             containerColor = Color.White
-        ), modifier = modifier
+        ),
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier
@@ -76,10 +78,11 @@ fun StatementFullCard(
             Spacer(modifier = Modifier.padding(top = 8.dp))
             Row {
                 Text(
-                    text = stringResource(R.string.road_length), style = S14_W400
+                    text = stringResource(R.string.road_length),
+                    style = S14_W400
                 )
                 Text(
-                    text = length,
+                    text = "$length м",
                     style = S14_W400,
                     modifier = Modifier.padding(start = 4.dp)
                 )

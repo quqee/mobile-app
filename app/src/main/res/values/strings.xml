@@ -51,6 +51,16 @@
     // Statements
     <string name="createStatement">Создать ведомость</string>
     <string name="statement">Ведомость</string>
+    <string name="statementsRu">Ведомости</string>
+    <string name="newStatement">Новая ведомость</string>
+    <string name="roadName">Наименование дороги/участка</string>
+    <string name="roadLength">Протяженность (м)</string>
+    <string name="roadType">Категория дороги</string>
+    <string name="roadSurface">Тип покрытия</string>
+    <string name="direction">Направление</string>
+    <string name="chooseRoadType">Выберите тип дороги</string>
+    <string name="chooseSurfaceType">Выберите тип дорожного покрытия</string>
+    <string name="statementCreationError">Ошибка при создании ведомости</string>
 
     // Defects
     <string name="defects">Дефекты</string>
@@ -61,4 +71,15 @@
     <string name="error_address">Не удалось загрузить адрес</string>
     <string name="work_result">Результаты работы</string>
     <string name="square_meters">%1$s м\u00B2</string>
+    <string name="mark_as_done">Отметить как выполненное</string>
+    <string name="select_action">Что Вы хотите сделать?</string>
+    <string name="intro_1_title">Добро пожаловать в RoadCare!</string>
+    <string name="intro_1_desc">Ваш помощник в управлении состоянием дорожного покрытия. Вы сможете сократить время на фиксацию дефектов и оперативно реагировать на возникающие проблемы</string>
+    <string name="intro_2_title">Оптимизация процессов</string>
+    <string name="intro_2_desc">Забудьте о неудобных бумажных отчетах и долгих процессах передачи информации! С нами вы сможете более эффективно управлять процессом обслуживания дорог</string>
+    <string name="intro_3_title">Эффективное управление задачами!</string>
+    <string name="intro_3_desc">Наше приложение позволяет вам легко и быстро назначать задачи исполнителям работ. Теперь процесс управления дефектами стал еще более прозрачным и эффективным</string>
+    <string name="skip">Пропустить</string>
+    <string name="next">Далее</string>
+    <string name="lets_start">Начать</string>
 </resources>

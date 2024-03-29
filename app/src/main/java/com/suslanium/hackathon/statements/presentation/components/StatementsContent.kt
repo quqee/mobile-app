@@ -1,8 +1,11 @@
 package com.suslanium.hackathon.statements.presentation.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,21 +35,26 @@ import com.suslanium.hackathon.statements.data.model.StatementResponseDto
 fun StatementsContent(
     statements: List<StatementResponseDto>,
     onNavigateToStatement: (String) -> Unit,
+    onNavigateToCreateStatement: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
             contentPadding = PaddingValues(
                 vertical = 20.dp,
                 horizontal = PaddingMedium
-            )
+            ),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.statements),
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(id = R.string.statementsRu),
                     style = S20_W700,
                     color = DarkBlue,
                     textAlign = TextAlign.Center
@@ -72,9 +80,7 @@ fun StatementsContent(
                     bottom = PaddingMedium,
                     end = PaddingRegular
                 ),
-            onClick = {
-                // TODO navigate to add statement
-            },
+            onClick = onNavigateToCreateStatement,
             containerColor = Primary,
             contentColor = Color.White
         ) {

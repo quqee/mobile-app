@@ -18,13 +18,9 @@ import com.google.android.gms.location.LocationServices
 import com.suslanium.hackathon.R
 import com.suslanium.hackathon.databinding.ActivityMapSelectionBinding
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.ScreenPoint
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.map.IconStyle
-import com.yandex.mapkit.map.InputListener
-import com.yandex.mapkit.map.Map
-import com.yandex.mapkit.map.MapObjectCollection
-import com.yandex.runtime.image.ImageProvider
 
 class MapSelectionActivity : AppCompatActivity() {
 
@@ -54,30 +50,7 @@ class MapSelectionActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var imageProvider: ImageProvider
-
-    private val iconStyle = IconStyle().setScale(0.33f)
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
-    private lateinit var mapObjects: MapObjectCollection
-
-    private val mapInputListener = object : InputListener {
-        override fun onMapTap(map: Map, point: Point) {
-            mapObjects.clear()
-            mapObjects.addPlacemark().apply {
-                geometry = point
-                setIcon(imageProvider, iconStyle)
-            }
-            selectionResult = point
-            binding.confirmFab.isEnabled = true
-        }
-
-        override fun onMapLongTap(map: Map, point: Point) {}
-    }
-
-    private var selectionResult: Point? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,17 +97,19 @@ class MapSelectionActivity : AppCompatActivity() {
                 }
             }
         }
+
         binding.confirmFab.setOnClickListener {
+            val centerX = binding.mapView.mapWindow.width() / 2f
+            val centerY = binding.mapView.mapWindow.height() / 2f
+            val centerPoint = ScreenPoint(centerX, centerY)
+            val worldPoint = binding.mapView.mapWindow.screenToWorld(centerPoint)
             val resultIntent = Intent().apply {
-                putExtra(LATITUDE, selectionResult?.latitude)
-                putExtra(LONGITUDE, selectionResult?.longitude)
+                putExtra(LATITUDE, worldPoint?.latitude)
+                putExtra(LONGITUDE, worldPoint?.longitude)
             }
             setResult(RESULT_OK, resultIntent)
             finish()
         }
-        binding.mapView.mapWindow.map.addInputListener(mapInputListener)
-        imageProvider = ImageProvider.fromResource(this, R.drawable.map_location_icon)
-        mapObjects = binding.mapView.mapWindow.map.mapObjects.addCollection()
     }
 
     override fun onStart() {

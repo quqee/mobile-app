@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.defect.presentation
+package com.suslanium.hackathon.defect.presentation.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -53,7 +53,7 @@ import com.suslanium.hackathon.core.ui.theme.Primary
 import com.suslanium.hackathon.core.ui.theme.S20_W700
 import com.suslanium.hackathon.core.ui.theme.VeryLightGray
 import com.suslanium.hackathon.core.ui.theme.White
-import com.suslanium.hackathon.defect.data.DefectModel
+import com.suslanium.hackathon.defect.data.model.DefectModel
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.search.Response
@@ -67,9 +67,9 @@ val searchManager = SearchFactory.getInstance().createSearchManager(SearchManage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DefectScreen(
+fun DefectContent(
     model: DefectModel,
-    onEditClick: () -> Unit = {},
+    onMarkAsDone: () -> Unit = {}
 ) {
     val lifeCycleState by LocalLifecycleOwner.current.lifecycle.observeAsState()
     val context = LocalContext.current
@@ -100,6 +100,16 @@ fun DefectScreen(
 
             else -> Unit
         }
+    }
+    var shouldShowActionDialog by remember { mutableStateOf(false) }
+
+    if (shouldShowActionDialog) {
+        DefectActionDialog(onMarkAsDone = {
+            shouldShowActionDialog = false
+            onMarkAsDone()
+        }, onCancelClick = {
+            shouldShowActionDialog = false
+        })
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -246,15 +256,19 @@ fun DefectScreen(
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        FloatingActionButton(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(all = 16.dp),
-            contentColor = White,
-            containerColor = Primary,
-            onClick = onEditClick,
-        ) {
-            Icon(Icons.Filled.Edit, null)
+        if (model.status.statusAlternative != Status.DONE) {
+            FloatingActionButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(all = 16.dp),
+                contentColor = White,
+                containerColor = Primary,
+                onClick = {
+                    shouldShowActionDialog = true
+                },
+            ) {
+                Icon(Icons.Filled.Edit, null)
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.suslanium.hackathon.defect.presentation
+package com.suslanium.hackathon.defect.presentation.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

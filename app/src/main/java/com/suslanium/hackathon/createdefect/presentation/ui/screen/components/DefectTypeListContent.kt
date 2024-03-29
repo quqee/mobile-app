@@ -59,7 +59,7 @@ fun DefectTypeListContent(
         )
         Spacer(modifier = Modifier.height(20.dp))
         LazyColumn {
-            items(defectTypes.size) {
+            items(defectTypes.size, key = { defectTypes[it].id }) {
                 val defectType = defectTypes[it]
                 Column(modifier = Modifier
                     .fillMaxWidth()
