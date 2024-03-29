@@ -52,7 +52,8 @@ fun ShortDefectCard(
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = defect.status.iconId),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = defect.status.color
                 )
 
                 Spacer(modifier = Modifier.width(10.dp))
@@ -75,7 +76,7 @@ fun ShortDefectCard(
             Spacer(modifier = Modifier.height(PaddingSmall))
 
             Text(
-                text = defect.description,
+                text = defect.description ?: "",
                 style = S14_W400,
                 color = BlueGray
             )

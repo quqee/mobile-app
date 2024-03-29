@@ -13,7 +13,9 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun DefectScreen(defectId: String, onCloseScreen: () -> Unit = {}) {
+fun DefectScreen(
+    defectId: String, onNavigateToAddReview: () -> Unit
+) {
     val viewModel: DefectViewModel = koinViewModel {
         parametersOf(defectId)
     }
@@ -21,12 +23,13 @@ fun DefectScreen(defectId: String, onCloseScreen: () -> Unit = {}) {
     val content by remember { viewModel.defectContent }
 
     Crossfade(targetState = screenState, label = "") { state ->
-        when(state) {
+        when (state) {
             DefectScreenState.Content -> {
                 content?.let {
-                    DefectContent(model = it)
+                    DefectContent(model = it, onMarkAsDone = onNavigateToAddReview)
                 }
             }
+
             DefectScreenState.Error -> ErrorContent(viewModel::loadData)
             DefectScreenState.Loading -> LoadingContent()
         }
