@@ -22,6 +22,9 @@ fun BottomNavigation(
             StatementsScreen(
                 onNavigateToStatement = {
                     rootNavController.navigate("${RoadCareDestinations.STATEMENT}/$it")
+                },
+                onNavigateToCreateStatement = {
+                    rootNavController.navigate(RoadCareDestinations.CREATE_STATEMENT)
                 }
             )
         }
