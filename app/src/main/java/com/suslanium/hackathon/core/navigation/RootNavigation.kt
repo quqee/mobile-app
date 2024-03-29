@@ -22,11 +22,13 @@ import androidx.navigation.navArgument
 import com.suslanium.hackathon.auth.presentation.AuthScreen
 import com.suslanium.hackathon.createdefect.presentation.ui.screen.CreateDefectScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
+import com.suslanium.hackathon.splash.presentation.SplashScreen
 import com.suslanium.hackathon.statements.presentation.screen.CreateStatementScreen
 import com.suslanium.hackathon.statements.presentation.screen.StatementScreen
 
 object RoadCareDestinations {
     // Root
+    const val SPLASH = "splash"
     const val ONBOARDING = "onboarding"
     const val AUTH = "auth"
     const val CREATE_DEFECT = "create_defect"
@@ -46,7 +48,7 @@ fun RootNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = RoadCareDestinations.ONBOARDING
+        startDestination = RoadCareDestinations.SPLASH
     ) {
         composable(RoadCareDestinations.ONBOARDING) {
             OnboardingScreen(
@@ -117,6 +119,16 @@ fun RootNavigation(
                 onNavigateBack = {
                     navController.popBackStack()
                     navController.popBackStack()
+                    navController.navigate(RoadCareDestinations.STATEMENTS)
+                }
+            )
+        }
+        composable(RoadCareDestinations.SPLASH) {
+            SplashScreen(
+                onNavigateToOnboarding = {
+                    navController.navigate(RoadCareDestinations.ONBOARDING)
+                },
+                onNavigateToStatements = {
                     navController.navigate(RoadCareDestinations.STATEMENTS)
                 }
             )

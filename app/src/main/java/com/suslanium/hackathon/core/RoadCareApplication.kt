@@ -11,6 +11,7 @@ import com.suslanium.hackathon.defect.di.defectProvidePresentationModule
 import com.suslanium.hackathon.defect.di.provideDefectDataModule
 import com.suslanium.hackathon.di.providePresentationModule
 import com.suslanium.hackathon.profile.di.profileProvidePresentationModule
+import com.suslanium.hackathon.splash.di.provideSplashPresentationModule
 import com.suslanium.hackathon.statements.di.provideStatementsDataModule
 import com.suslanium.hackathon.statements.di.provideStatementsPresentationModule
 import com.yandex.mapkit.MapKitFactory
@@ -43,6 +44,8 @@ class RoadCareApplication : Application() {
                 defectProvidePresentationModule(),
                 provideCreateDefectDataModule(),
                 provideCreateDefectPresentationModule(),
+
+                provideSplashPresentationModule()
             )
         }
     }
