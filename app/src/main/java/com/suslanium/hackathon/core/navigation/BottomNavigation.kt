@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.suslanium.hackathon.defect.presentation.ui.components.MapView
+import com.suslanium.hackathon.profile.presentation.screen.ProfileScreen
 import com.suslanium.hackathon.statements.presentation.screen.StatementsScreen
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
@@ -27,6 +28,9 @@ fun BottomNavigation(
             StatementsScreen(
                 onNavigateToStatement = {
                     rootNavController.navigate("${RoadCareDestinations.STATEMENT}/$it")
+                },
+                onNavigateToCreateStatement = {
+                    rootNavController.navigate(RoadCareDestinations.CREATE_STATEMENT)
                 }
             )
         }
@@ -37,10 +41,14 @@ fun BottomNavigation(
             ), modifier = Modifier.fillMaxSize(), blockInput = false)
         }
         composable(RoadCareDestinations.PROFILE) {
-            PlaceholderScreen(
-                text = "profile",
-                onButtonClick = {},
-                buttonText = "placeholder"
+            ProfileScreen(
+                onNavigateToAuth = {
+                    rootNavController.navigate(RoadCareDestinations.AUTH) {
+                        popUpTo(RoadCareDestinations.AUTH) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
     }

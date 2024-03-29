@@ -47,10 +47,13 @@
     <string name="statementsRu">Ведомости</string>
     <string name="newStatement">Новая ведомость</string>
     <string name="roadName">Наименование дороги/участка</string>
-    <string name="roadLength">Протяженность (км)</string>
+    <string name="roadLength">Протяженность (м)</string>
     <string name="roadType">Категория дороги</string>
     <string name="roadSurface">Тип покрытия</string>
     <string name="direction">Направление</string>
+    <string name="chooseRoadType">Выберите тип дороги</string>
+    <string name="chooseSurfaceType">Выберите тип дорожного покрытия</string>
+    <string name="statementCreationError">Ошибка при создании ведомости</string>
 
     // Defects
     <string name="defects">Дефекты</string>

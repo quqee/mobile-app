@@ -24,16 +24,20 @@ import com.suslanium.hackathon.createdefect.presentation.ui.screen.CreateDefectS
 import com.suslanium.hackathon.defect.presentation.ui.AddReviewScreen
 import com.suslanium.hackathon.defect.presentation.ui.DefectScreen
 import com.suslanium.hackathon.onboarding.presentation.OnboardingScreen
+import com.suslanium.hackathon.splash.presentation.SplashScreen
+import com.suslanium.hackathon.statements.presentation.screen.CreateStatementScreen
 import com.suslanium.hackathon.statements.presentation.screen.StatementScreen
 
 object RoadCareDestinations {
     // Root
+    const val SPLASH = "splash"
     const val ONBOARDING = "onboarding"
     const val AUTH = "auth"
     const val CREATE_DEFECT = "create_defect"
     const val DEFECT = "defect"
     const val ADD_REVIEW = "add_review"
     const val STATEMENT = "statement"
+    const val CREATE_STATEMENT = "create_statement"
 
     // Bottom navigation
     const val STATEMENTS = "statements"
@@ -46,7 +50,8 @@ fun RootNavigation(
     navController: NavHostController, onCloseApp: () -> Unit
 ) {
     NavHost(
-        navController = navController, startDestination = RoadCareDestinations.ONBOARDING
+        navController = navController,
+        startDestination = RoadCareDestinations.SPLASH
     ) {
         composable(RoadCareDestinations.ONBOARDING) {
             OnboardingScreen(onNavigateToAuth = {
@@ -122,6 +127,25 @@ fun RootNavigation(
                 navController.popBackStack()
                 navController.navigate("${RoadCareDestinations.DEFECT}/$defectId")
             })
+        }
+        composable(RoadCareDestinations.CREATE_STATEMENT) {
+            CreateStatementScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.navigate(RoadCareDestinations.STATEMENTS)
+                }
+            )
+        }
+        composable(RoadCareDestinations.SPLASH) {
+            SplashScreen(
+                onNavigateToOnboarding = {
+                    navController.navigate(RoadCareDestinations.ONBOARDING)
+                },
+                onNavigateToStatements = {
+                    navController.navigate(RoadCareDestinations.STATEMENTS)
+                }
+            )
         }
     }
 }

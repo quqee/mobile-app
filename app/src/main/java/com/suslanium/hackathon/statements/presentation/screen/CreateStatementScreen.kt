@@ -1,80 +1,42 @@
 package com.suslanium.hackathon.statements.presentation.screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.suslanium.hackathon.R
-import com.suslanium.hackathon.core.ui.common.AppOutlinedTextField
-import com.suslanium.hackathon.core.ui.common.PrimaryButton
-import com.suslanium.hackathon.core.ui.common.RoadCareTopBar
-import com.suslanium.hackathon.core.ui.theme.PaddingMedium
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.suslanium.hackathon.statements.presentation.components.CreateStatementForm
+import com.suslanium.hackathon.statements.presentation.components.RoadTypeChoiceScreen
+import com.suslanium.hackathon.statements.presentation.components.SurfaceTypeChoiceScreen
+import com.suslanium.hackathon.statements.presentation.state.CreateStatementSection
+import com.suslanium.hackathon.statements.presentation.viewmodel.CreateStatementViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CreateStatementScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-//    viewModel: CreateStatementViewModel = koinViewModel()
+    viewModel: CreateStatementViewModel = koinViewModel()
 ) {
-    Scaffold(
-        topBar = {
-            RoadCareTopBar(
-                text = stringResource(id = R.string.newStatement),
-                onBackButtonClick = onNavigateBack
-            )
-        },
+    val section by viewModel.createStatementSection.collectAsStateWithLifecycle()
+
+    Crossfade(
+        targetState = section,
+        label = ""
     ) {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(it)
-                .padding(horizontal = PaddingMedium)
-                .background(Color.White),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            AppOutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = stringResource(id = R.string.roadName)
+        when (it) {
+            CreateStatementSection.CreationForm -> CreateStatementForm(
+                modifier = modifier,
+                onNavigateBack = onNavigateBack,
+                viewModel = viewModel
             )
-
-            AppOutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = stringResource(id = R.string.roadLength)
+            CreateStatementSection.RoadTypes -> RoadTypeChoiceScreen(
+                onNavigateBack = viewModel::openCreationForm,
+                viewModel = viewModel
             )
-
-            AppOutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = stringResource(id = R.string.roadType)
-            )
-
-            AppOutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = stringResource(id = R.string.roadSurface)
-            )
-
-            AppOutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = stringResource(id = R.string.direction)
-            )
-
-            PrimaryButton(
-                text = stringResource(id = R.string.create),
-                onClick = {
-                    // TODO
-                }
+            CreateStatementSection.SurfaceTypes -> SurfaceTypeChoiceScreen(
+                onNavigateBack = viewModel::openCreationForm,
+                viewModel = viewModel
             )
         }
     }
