@@ -76,6 +76,8 @@ fun RootNavigation(
 
             CreateDefectScreen(statementId = statementId, onNavigateAfterSuccess = {
                 navController.popBackStack()
+                navController.popBackStack()
+                navController.navigate("${RoadCareDestinations.STATEMENT}/$statementId")
             }, onNavigateBack = {
                 navController.popBackStack()
             })

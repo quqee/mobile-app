@@ -1,12 +1,14 @@
 package com.suslanium.hackathon.defect.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class DefectModel(
-    val defectId: String,
+    @SerializedName("id") val defectId: String,
     val latitude: Double,
     val longitude: Double,
-    val defectType: String,
-    val defectDistance: Double?,
+    @SerializedName("type") val defectType: String,
+    @SerializedName("distance") val defectDistance: Double?,
     val status: DefectStatus,
-    val picturesBeforeRepair: List<String>,
-    val picturesAfterRepair: List<String>
+    @SerializedName("pictures_before_repair") val picturesBeforeRepair: List<String>,
+    @SerializedName("pictures_after_repair") val picturesAfterRepair: List<String>
 )
