@@ -66,4 +66,13 @@
     <string name="square_meters">%1$s м\u00B2</string>
     <string name="mark_as_done">Отметить как выполненное</string>
     <string name="select_action">Что Вы хотите сделать?</string>
+    <string name="intro_1_title">Добро пожаловать в RoadCare!</string>
+    <string name="intro_1_desc">Ваш помощник в управлении состоянием дорожного покрытия. Вы сможете сократить время на фиксацию дефектов и оперативно реагировать на возникающие проблемы</string>
+    <string name="intro_2_title">Оптимизация процессов</string>
+    <string name="intro_2_desc">Забудьте о неудобных бумажных отчетах и долгих процессах передачи информации! С нами вы сможете более эффективно управлять процессом обслуживания дорог</string>
+    <string name="intro_3_title">Эффективное управление задачами!</string>
+    <string name="intro_3_desc">Наше приложение позволяет вам легко и быстро назначать задачи исполнителям работ. Теперь процесс управления дефектами стал еще более прозрачным и эффективным</string>
+    <string name="skip">Пропустить</string>
+    <string name="next">Далее</string>
+    <string name="lets_start">Начать</string>
 </resources>

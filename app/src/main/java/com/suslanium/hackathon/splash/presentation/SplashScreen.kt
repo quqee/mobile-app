@@ -15,14 +15,14 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SplashScreen(
-    onNavigateToOnboarding: () -> Unit,
+    onNavigateToIntro: () -> Unit,
     onNavigateToStatements: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = koinViewModel()
 ) {
     ObserveAsEvents(flow = viewModel.splashEventFlow) { event ->
         when (event) {
-            SplashEvent.AuthenticationRequired -> onNavigateToOnboarding()
+            SplashEvent.AuthenticationRequired -> onNavigateToIntro()
             SplashEvent.UserAuthenticated -> onNavigateToStatements()
         }
     }
