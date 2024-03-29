@@ -60,7 +60,11 @@ fun StatusElement(modifier: Modifier = Modifier, status: Status) {
             }
 
             Status.OPENED -> {
-                Icon(imageVector = Icons.Default.CropFree, contentDescription = null, tint = LightGray)
+                Icon(
+                    imageVector = Icons.Default.CropFree,
+                    contentDescription = null,
+                    tint = LightGray
+                )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.opened), style = S12_W400, color = LightGray)
             }
