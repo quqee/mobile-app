@@ -7,8 +7,10 @@ import com.suslanium.hackathon.defect.data.model.DefectModel
 import com.suslanium.hackathon.defect.data.model.DefectStatus
 import com.suslanium.hackathon.defect.data.model.UpdateStatusModel
 import kotlinx.coroutines.delay
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 class DefectRepository(
     private val defectApiService: DefectApiService, private val context: Context
@@ -22,9 +24,12 @@ class DefectRepository(
             defectId, UpdateStatusModel(status = DefectStatus.COMPLETED)
         )
         for (uri in photos) {
-            val requestBody =
-                MultipartBody.Builder().setType(MultipartBody.FORM).addFile(uri).build()
+            val file = uri.createTempFile()
+            val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart(
+                "file", file.name, file.asRequestBody("image/*".toMediaTypeOrNull())
+            ).build()
             defectApiService.addReviewPicture(defectId, requestBody)
+            file.delete()
         }
     }
 
@@ -36,13 +41,17 @@ class DefectRepository(
         delay(1000)
     }
 
-    private fun MultipartBody.Builder.addFile(
-        uri: Uri, key: String = "file"
-    ): MultipartBody.Builder {
-        val fileStream = context.contentResolver.openInputStream(uri)
+    private fun Uri.createTempFile(): File {
+        val fileStream = context.contentResolver.openInputStream(this)
         val fileBytes = fileStream?.readBytes()
         fileStream?.close()
-        return this.addFormDataPart(key, uri.lastPathSegment, fileBytes!!.toRequestBody())
+
+        val outputDir: File = context.cacheDir
+        val outputFile = File.createTempFile("prefix", "-suffix", outputDir)
+        if (fileBytes != null) {
+            outputFile.writeBytes(fileBytes)
+        }
+        return outputFile
     }
 
 }
